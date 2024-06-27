@@ -9,35 +9,10 @@ import sys
 
 def main(input_file, output_file, dinamica):
     # Dicionário de parceiros
-    autores_por_parceiro = {
-    'LACENPA': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Gleissy, Borges; Kátia, Furtado; Shirley, Chagas; Patrícia, Costa",
-    'LACENAL': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Hazerral, Santos; Eladja, Mendes",
-    'LACENMT': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Stephanni, Silva; Luana, Silva; Julia, Almeida; Elaine, Oliveira",
-    'LACENDF': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Brenno, Henrique; Lucas, Vieira; Mariana, Roll; Jordan, Silva; Agenor, Castro",
-    'LACENPR': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Guilherme, Becker; Aline, Freund; Irina, Riediger; Leticia, Santos",
-    'PMPSP': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Luciano, Oliveira; Sumire, Hibi; Isabelle, Ferreira; Melissa, Palmieri; Eduardo, Mais",
-    'FB': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni",
-    'HRPSP': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Elaine, Santos; Debora, La-Roque; Mariane, Evaristo; Evandra, Rodrigues; Simone, Kashima",
-    'SBC': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Tancredo, Santos; Sheila, Costa",
-    'ZOOSP': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Luciano, Oliveira; Sumire, Hibi; Isabelle, Ferreira; Melissa, Palmieri; Eduardo, Mais",
-    'VEB': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Ezequiel Aparecido, dos Santos; Rita, Altino; Carlos, dos Santos; Thiago, Dionísio",
-    'AFIP': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Luciano, Oliveira; Sumire, Hibi; Isabelle, Ferreira; Melissa, Palmieri; Eduardo, Mais",
-    'BAX': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Ana Paula, Valeiras; Willian, Fioratti",
-    'FAMERP': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Mauricio, Nogueira; Cecilia, Banho; Beatriz, Marques; Livia, Sacchetto",
-    'BIOFAST': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Luciano, Oliveira; Sumire, Hibi; Isabelle, Ferreira; Melissa, Palmieri; Eduardo, Mais",
-    'FBA': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni",
-    'UNESP': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Maercio, Alho; Gabriela, Poli; Leonardo, Moraes",
-    'PSPAG': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Luciano, Oliveira; Sumire, Hibi; Isabelle, Ferreira; Melissa, Palmieri; Eduardo, Mais"
-    }
+    autores_por_parceiro = {}
 
     #dicionario de siglas
-    siglas = {
-    "SAO PAULO": "SP",
-    "DISTRITO FEDERAL": "DF",
-    "MATO GROSSO": "MT",
-    "PARA": "PA",
-    "PARANA": "PR",
-    }
+    siglas = {}
     
     # Carregar o arquivo TSV em um DataFrame do Pandas
     df = pd.read_csv(input_file)
@@ -119,17 +94,17 @@ def main(input_file, output_file, dinamica):
     ]
     
     df_final.to_csv(f'{output_file}_{dinamica}.tsv', sep='\t', index=False)
-    df_gabi = pd.read_csv(f'{output_file}_{dinamica}.tsv', sep='\t')
-    df_gabi['Submitter'] = 'gabriela.rribeiro'
-    df_gabi.rename(columns={'Address1': 'Address'}, inplace=True)
-    df_gabi['FASTA filename'] = f'{output_file}_{dinamica}.fasta'
+    df_gisaid = pd.read_csv(f'{output_file}_{dinamica}.tsv', sep='\t')
+    df_gisaid['Submitter'] = 'gabriela.rribeiro'
+    df_gisaid.rename(columns={'Address1': 'Address'}, inplace=True)
+    df_gisaid['FASTA filename'] = f'{output_file}_{dinamica}.fasta'
     
     #trasformar o arquivo em excel e remoção de arquivos temporarios
-    df_gabi = df_gabi.T.reset_index().T 
+    df_gisaid = df_gisaid.T.reset_index().T 
 
-    df_gabi.columns=colunas_desejadas
+    df_gisaid.columns=colunas_desejadas
 
-    df_gabi.to_excel(f'{output_file}_{dinamica}.xlsx', engine='openpyxl', index=False)
+    df_gisaid.to_excel(f'{output_file}_{dinamica}.xlsx', engine='openpyxl', index=False)
 
     os.remove(f'{output_file}_{dinamica}.tsv')
   
