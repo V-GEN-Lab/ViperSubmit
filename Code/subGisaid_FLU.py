@@ -34,7 +34,7 @@ def main(input_file, output_file, Dynamic, fasta):
     }
 
     # Dictionary of authors by partner
-    autores_por_parceiro = {}
+    partner_authors = {}
 
     # Load the TSV file into a Pandas DataFrame
     df = pd.read_csv(input_file, encoding='latin-1')
