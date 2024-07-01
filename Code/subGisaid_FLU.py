@@ -8,7 +8,7 @@ import re # Library for regular expression operations
 import sys # Library for Python system interactions
 import subprocess # Library for executing system commands
 
-def main(input_file, output_file, dinamica, fasta):
+def main(input_file, output_file, Dynamics, fasta):
     # Dictionary for segment mapping
     segments_mapping = {
         'segment_1_Coverage':'PB2',
@@ -34,17 +34,7 @@ def main(input_file, output_file, dinamica, fasta):
     }
 
     # Dictionary of authors by partner
-    autores_por_parceiro = {
-        'LACENPA': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Gleissy, Borges; Kátia, Furtado; Shirley, Chagas; Patrícia, Costa",
-        'LACENAL': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Hazerral, Santos; Eladja, Mendes",
-        'LACENMT': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Stephanni, Silva; Luana, Silva; Julia, Almeida; Elaine, Oliveira",
-        'LACENDF': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni",
-        'LACENPR': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Guilherme, Becker;  Aline, Freund; Irina, Riediger; Leticia, Santos",
-        'PMPSP': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Luciano, Oliveira; Sumire, Hibi; Isabelle, Ferreira; Melissa, Palmieri; Eduardo, Mais",
-        'FB': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni",
-        'HRPSP': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Elaine, Santos; Debora, La-Roque; Mariane, Evaristo; Evandra, Rodrigues; Simone, Kashima",
-        'SBC': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Tancredo, Santos; Sheila, Costa"
-    }
+    autores_por_parceiro = {}
 
     # Load the TSV file into a Pandas DataFrame
     df = pd.read_csv(input_file, encoding='latin-1')
@@ -75,7 +65,7 @@ def main(input_file, output_file, dinamica, fasta):
     
     colunas_selecionadas = []
     dados_lista_troca = [] 
-    df['DATA_DA_COLETA'] = pd.to_datetime(df['DATA_DA_COLETA'])
+    df['Collection_Date'] = pd.to_datetime(df['Collection_Date'])
     
     # Create an empty DataFrame to store the results
     df_gen_rename = pd.DataFrame(columns=['Index', 'segment', 'Valor', 'Seq_Id (HA)', 'Seq_Id (NA)', 'Seq_Id (PB1)', 'Seq_Id (PB2)', 'Seq_Id (PA)', 'Seq_Id (MP)', 'Seq_Id (NS)', 'Seq_Id (NP)', 'Seq_Id (HE)', 'Seq_Id (P3)'])
@@ -98,7 +88,7 @@ def main(input_file, output_file, dinamica, fasta):
             segment_name = segments_mapping.get(segment, '')
             if segment_name:
                 # Create the value to be inserted into the cell
-                cell_value = f'A/{row["UNIDADE_REQUISITANTE_ESTADO"]}/{row["CEVIVAS_ID"]}/{row["DATA_DA_COLETA"].year}_{segment_name}'
+                cell_value = f'A/{row["state"]}/{row["ID"]}/{row["Collection_Date"].year}_{segment_name}'
                 
                 # Fill in the cell corresponding to the segment with the created value in df_final
                 df_final.at[index, f'Seq_Id ({segment_name})'] = cell_value
@@ -149,25 +139,25 @@ def main(input_file, output_file, dinamica, fasta):
     # Fill in other columns of the final DataFrame
     df_final['Isolate_Id'] = ''
     df_final['Segment_Ids'] = ''
-    df_final['Isolate_Name'] = df.apply(lambda row: f"{row['Type']}/{row['UNIDADE_REQUISITANTE_ESTADO']}/{row['CEVIVAS_ID']}/{row['DATA_DA_COLETA'].year}", axis=1)
+    df_final['Isolate_Name'] = df.apply(lambda row: f"{row['Type']}/{row['state']}/{row['ID']}/{row['Collection_Date'].year}", axis=1)
     df_final['Subtype'] = df['Subtype']
     df_final.loc[df_final['Subtype'] == 'Victoria', 'Lineage'] = 'Victoria'
     df_final.loc[df_final['Subtype'] == 'Victoria', 'Subtype'] = ''
     df_final['Passage_History'] = 'Original'
-    df_final['Location'] = 'Brazil'
+    df_final['Location'] = 'country'
     df_final['province'] = ''
     df_final['sub_province'] = ''
     df_final['Location_Additional_info'] = ''
     df_final['Host'] = 'Human'
     df_final['Host_Additional_info'] = ''
-    df_final['Authors'] = df.apply(lambda row: autores_por_parceiro.get(row['PARCEIRO_PROJETO'], ''), axis=1)
-    df_final['Originating_Lab_Id'] = "3483"
-    df_final['Collection_Date'] = df['DATA_DA_COLETA'].dt.date
+    df_final['Authors'] = df.apply(lambda row: autores_por_parceiro.get(row['PARTNER_PROJECT'], ''), axis=1)
+    df_final['Originating_Lab_Id'] = ""
+    df_final['Collection_Date'] = df['Collection_Date'].dt.date
     
     # Generate the log
     subtype_info = df['Subtype'].unique()
     subtype_log = f'Subtypes: {", ".join(subtype_info)}\n'
-    log = f'File generated on {datetime.now()} by {getpass.getuser()}\n{subtype_log}Dinâmica number: {dinamica}\n'
+    log = f'File generated on {datetime.now()} by {getpass.getuser()}\n{subtype_log}Dynamics number: {Dynamics}\n'
 
     
     # Save the log to a text file (append mode)
@@ -175,9 +165,9 @@ def main(input_file, output_file, dinamica, fasta):
         f.write(log)
 
     # Save the final DataFrame to a new TSV file
-    df_final.to_excel(f'{output_file}_{dinamica}.xlsx', engine='openpyxl', index=False)
+    df_final.to_excel(f'{output_file}_{Dynamics}.xlsx', engine='openpyxl', index=False)
     
-    # Print the dinâmica number and virus type
+    # Print the Dynamics number and virus type
     print(log)
 
     
@@ -215,7 +205,7 @@ def main(input_file, output_file, dinamica, fasta):
     fasta_files = [file for file in os.listdir(pwd_output) if file.endswith('.fasta')]
 
     # Open the output file in write mode
-    with open(f'{output_file}_{dinamica}_RAW.fas', 'w') as output_handle:
+    with open(f'{output_file}_{Dynamics}_RAW.fas', 'w') as output_handle:
         # Iterate over each FASTA file
         for fasta_file in fasta_files:
             # Open each FASTA file in read mode
@@ -241,7 +231,7 @@ def main(input_file, output_file, dinamica, fasta):
     sequencias_correspondentes = []
 
     # Iterate over the sequences in the multi-FASTA file
-    for record in SeqIO.parse(f'{output_file}_{dinamica}_RAW.fas', "fasta"):
+    for record in SeqIO.parse(f'{output_file}_{Dynamics}_RAW.fas', "fasta"):
         # Remove the ">" from the FASTA header
         fasta_header = record.id.replace(">", "")
         
@@ -262,12 +252,12 @@ def main(input_file, output_file, dinamica, fasta):
             sequencias_correspondentes.append(record)
 
     # Write the corresponding sequences to a new multi-FASTA file
-    with open(f'{output_file}_{dinamica}.fasta', "w") as output_handle:
+    with open(f'{output_file}_{Dynamics}.fasta', "w") as output_handle:
         SeqIO.write(sequencias_correspondentes, output_handle, "fasta")
 
     # Remove the temporary files used in the process
     os.remove('list.txt')
-    os.remove(f'{output_file}_{dinamica}_RAW.fas')
+    os.remove(f'{output_file}_{Dynamics}_RAW.fas')
 
 
 
@@ -275,7 +265,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Processa um arquivo TSV.')
     parser.add_argument('--input', type=str, help='Caminho para o arquivo de entrada TSV')
     parser.add_argument('--output', type=str, help='Nome do arquivo de saída TSV')
-    parser.add_argument('--D', type=str, help='Número de dinâmica')
+    parser.add_argument('--D', type=str, help='Número de Dynamics')
     parser.add_argument('--fasta', type=str, required=True, help='caminho para a pastas dos fastas')
     args = parser.parse_args()
    
