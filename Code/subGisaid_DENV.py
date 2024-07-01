@@ -44,7 +44,7 @@ def main(input_file, output_file, Dynamic, fasta):
     df_final['Host'] = 'Human'
     df_final['Passage details/history'] = 'Original'
     df_final['Collection_Date'] = df_passed_qc['Collection_Date'].dt.date
-    df_final['Location'] = df_passed_qc.apply(lambda row: f"South America / country / {row['state']}", axis=1)
+    df_final['Location'] = df_passed_qc.apply(lambda row: f"continent / country / {row['state']}", axis=1)
     df_final['Additional location information'] = ''
     df_final['Additional host information'] = ''
     df_final['Sampling Strategy'] = ''
