@@ -7,31 +7,12 @@ from Bio import SeqIO  # Import Bio.SeqIO library for FASTA file handling
 import re  # Import re library for regular expressions
 import sys  # Import sys library to exit the program
 
-def main(input_file, output_file, dinamica, fasta):
+def main(input_file, output_file, Dynamic, fasta):
     # Dictionary mapping authors by partner
-    autores_por_parceiro = {
-        'LACENPA': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni; Gleissy Borges; Kátia Furtado; Shirley Chagas; Patrícia Costa",
-        'LACENAL': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni; Hazerral Santos; Eladja Mendes",
-        'LACENMT': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni; Stephanni Silva; Luana Silva; Julia Almeida; Elaine Oliveira",
-        'LACENDF': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni",
-        'LACENPR': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni; Guilherme Becker; Aline Freund; Irina Riediger; Leticia Santos",
-        'PMPSP': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni; Luciano Oliveira; Sumire Hibi; Isabelle Ferreira; Melissa Palmieri; Eduardo Mais",
-        'FB': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni",
-        'HRPSP': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni; Elaine Santos; Debora La-Roque; Mariane Evaristo; Evandra Rodrigues; Simone Kashima",
-        'SBC': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni; Tancredo Santos; Sheila Costa",
-        'ZOOSP': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni; Luciano Oliveira; Sumire Hibi; Isabelle Ferreira; Melissa Palmieri; Eduardo Mais",
-        'VEB': "Gabriela Ribeiro; Alex Lima; Maria Elias; Sandra Vessoni; Ezequiel Aparecido dos Santos; Rita Altino; Carlos dos Santos; Thiago Dionísio"
-    }
+    autores_por_parceiro = {}
 
     # Dictionary of state abbreviations
-    siglas = {
-        "SAO PAULO": "SP",
-        "ALAGOAS": "AL",
-        "PARANA": "PR",
-        "PARA": "PA",
-        "MATO GROSSO": "MT",
-        "MINAS GERAIS": "MG"
-    }
+    siglas = {}
 
     # Load the TSV file into a Pandas DataFrame
     df = pd.read_csv(input_file, encoding='latin-1')
@@ -43,8 +24,8 @@ def main(input_file, output_file, dinamica, fasta):
     assert len(df_passed_qc) == len(df[df['Passed_QC'] == 'A']), "Not all rows were filtered correctly"
     print("All rows with 'A' in 'Passed QC?' were filtered correctly.")
 
-    # Convert 'DATA_DA_COLETA' column to datetime type
-    df_passed_qc['DATA_DA_COLETA'] = pd.to_datetime(df_passed_qc['DATA_DA_COLETA'])
+    # Convert 'Collection_Date' column to datetime type
+    df_passed_qc['Collection_Date'] = pd.to_datetime(df_passed_qc['Collection_Date'])
 
     # Initialize DataFrames for final result and genome exchange
     df_final = pd.DataFrame() 
@@ -52,18 +33,18 @@ def main(input_file, output_file, dinamica, fasta):
     
     # Create 'Seqs' column with formatted data from existing columns
     df_troca['Genome'] = df_passed_qc['Genome']
-    df_troca['Seqs'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/Brazil/{siglas.get(row['UNIDADE_REQUISITANTE_ESTADO'], '')}-{row['CEVIVAS_ID_NEW']}/{row['DATA_DA_COLETA'].year}", axis=1)
+    df_troca['Seqs'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/Brazil/{siglas.get(row['state'], '')}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
     
     # Populate other columns of the final DataFrame
     df_final['Submitter'] = ''
-    df_final['FASTA filename'] = f'{output_file}_{dinamica}.fasta'
-    df_final['Virus name'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/Brazil/{siglas.get(row['UNIDADE_REQUISITANTE_ESTADO'], '')}-{row['CEVIVAS_ID_NEW']}/{row['DATA_DA_COLETA'].year}", axis=1)
+    df_final['FASTA filename'] = f'{output_file}_{Dynamic}.fasta'
+    df_final['Virus name'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/country/{siglas.get(row['state'], '')}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
     df_final['type'] = 'Dengue Virus'
     df_final['Serotype'] = df_passed_qc.apply(lambda row: f"DENV{row['Serotype']}", axis=1)
     df_final['Host'] = 'Human'
     df_final['Passage details/history'] = 'Original'
-    df_final['Collection_Date'] = df_passed_qc['DATA_DA_COLETA'].dt.date
-    df_final['Location'] = df_passed_qc.apply(lambda row: f"South America / Brazil / {row['UNIDADE_REQUISITANTE_ESTADO']}", axis=1)
+    df_final['Collection_Date'] = df_passed_qc['Collection_Date'].dt.date
+    df_final['Location'] = df_passed_qc.apply(lambda row: f"South America / country / {row['state']}", axis=1)
     df_final['Additional location information'] = ''
     df_final['Additional host information'] = ''
     df_final['Sampling Strategy'] = ''
@@ -81,36 +62,36 @@ def main(input_file, output_file, dinamica, fasta):
     df_final['Assembly method'] = ''
     df_final['Depth of coverage'] = ''
     df_final['Publications'] = ''
-    df_final['Originating lab'] = df_passed_qc['UNIDADE_REQUISITANTE']
-    df_final['Address'] = df_passed_qc.apply(lambda row: f"{row['UNIDADE_REQUISITANTE_ESTADO']}, {siglas.get(row['UNIDADE_REQUISITANTE_ESTADO'], '')}", axis=1)
+    df_final['Originating lab'] = df_passed_qc['REQUESTING_UNIT'] 
+    df_final['Address'] = df_passed_qc.apply(lambda row: f"{row['state']}, {siglas.get(row['state'], '')}", axis=1)
     df_final['Sample ID given by the sample provider'] = ''
-    df_final['Submitting lab'] = 'Instituto Butantan'
-    df_final['Address1'] = 'Sao Paulo, SP'
+    df_final['Submitting lab'] = ''
+    df_final['Address1'] = ''
     df_final['Sample ID given by the submitting laboratory'] = ''
-    df_final['Authors'] = df_passed_qc.apply(lambda row: autores_por_parceiro.get(row['PARCEIRO_PROJETO'], ''), axis=1)
+    df_final['Authors'] = df_passed_qc.apply(lambda row: autores_por_parceiro.get(row['PARTNER_PROJECT'], ''), axis=1)
     df_final['Comment'] = ''
     df_final['Comment Icon'] = ''
     
     # Generate log with subtype information and user details
     Serptype_info = df['Genotype'].unique()
     subtype_log = f'Subtypes: {", ".join(map(str, Serptype_info))}\n'
-    log = f'File generated at {datetime.now()} by {getpass.getuser()}\n{subtype_log}Dynamic number: {dinamica}\n'
+    log = f'File generated at {datetime.now()} by {getpass.getuser()}\n{subtype_log}Dynamic number: {Dynamic}\n'
 
     # Save the log to a text file (append mode)
     with open(f'Sub_DENV_log.txt', 'a') as f:
         f.write(log)
 
     # Save the final DataFrame to a new TSV file
-    df_final.to_csv(f'{output_file}_{dinamica}.tsv', sep='\t', index=False)
+    df_final.to_csv(f'{output_file}_{Dynamic}.tsv', sep='\t', index=False)
     
     # Read the saved file and add/rename necessary columns
-    df_gisaid = pd.read_csv(f'{output_file}_{dinamica}.tsv', sep='\t')
-    df_gisaid['Submitter'] = 'gabriela.rribeiro'
+    df_gisaid = pd.read_csv(f'{output_file}_{Dynamic}.tsv', sep='\t')
+    df_gisaid['Submitter'] = ''
     df_gisaid.rename(columns={'Address1': 'Address'}, inplace=True)
-    df_gisaid['FASTA filename'] = f'{output_file}_{dinamica}.fasta'
+    df_gisaid['FASTA filename'] = f'{output_file}_{Dynamic}.fasta'
 
     # Remove the old TSV file
-    os.remove(f'{output_file}_{dinamica}.tsv')
+    os.remove(f'{output_file}_{Dynamic}.tsv')
 
     # Define desired columns for the DataFrame
     desired_columns = [
@@ -131,7 +112,7 @@ def main(input_file, output_file, dinamica, fasta):
     df_gisaid.columns = desired_columns
 
     # Save the final DataFrame to an Excel file
-    df_gisaid.to_excel(f'{output_file}_{dinamica}.xlsx', engine='openpyxl', index=False)
+    df_gisaid.to_excel(f'{output_file}_{Dynamic}.xlsx', engine='openpyxl', index=False)
 
     # Print the log
     print(log)
@@ -168,7 +149,7 @@ def main(input_file, output_file, dinamica, fasta):
     os.chdir(pwd_output)
 
     # Name of the resulting FASTA file
-    fas_file = f'{output_file}_{dinamica}_RAW.fas'
+    fas_file = f'{output_file}_{Dynamic}_RAW.fas'
 
     # List of FASTA files in the output directory
     fasta_files = [file for file in os.listdir(pwd_output) if file.endswith('.fasta')]
@@ -214,7 +195,7 @@ def main(input_file, output_file, dinamica, fasta):
     sequencias_correspondentes = []
 
     # Iterate over sequences in the multi-FASTA file
-    for record in SeqIO.parse(f'{output_file}_{dinamica}_RAW.fas', "fasta"):
+    for record in SeqIO.parse(f'{output_file}_{Dynamic}_RAW.fas', "fasta"):
         # Remove ">" from the FASTA header
         fasta_header = record.id.replace(">", "")
         
@@ -235,12 +216,12 @@ def main(input_file, output_file, dinamica, fasta):
             sequencias_correspondentes.append(record)
 
     # Write the corresponding sequences to the output FASTA file
-    with open(f'{output_file}_{dinamica}.fasta', "w") as output_handle:
+    with open(f'{output_file}_{Dynamic}.fasta', "w") as output_handle:
         SeqIO.write(sequencias_correspondentes, output_handle, "fasta")
 
     # Remove temporary files
     os.remove('list.txt')
-    os.remove(f'{output_file}_{dinamica}_RAW.fas')
+    os.remove(f'{output_file}_{Dynamic}_RAW.fas')
 
     # Análise de argumentos da linha de comando
     parser = argparse.ArgumentParser(description='Processa um arquivo TSV.')
