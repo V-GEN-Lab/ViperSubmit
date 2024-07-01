@@ -39,7 +39,7 @@ def main(input_file, output_file, dynamics, fasta):
     df_final['type'] = 'betacoronavirus'
     df_final['Passage_History'] = 'Original'
     df_final['Collection_Date'] = df_passed_qc['Collection_Date']
-    df_final['Location'] = df_passed_qc.apply(lambda row: f"South America / country / {row['state']}", axis=1)
+    df_final['Location'] = df_passed_qc.apply(lambda row: f"continent / country / {row['state']}", axis=1)
     df_final['Additional location information'] = ''
     df_final['Host'] = 'Human'
     df_final['Additional host information'] = ''
@@ -86,7 +86,7 @@ def main(input_file, output_file, dynamics, fasta):
     
     df_final.to_csv(f'{output_file}_{dynamics}.tsv', sep='\t', index=False)
     df_gabi = pd.read_csv(f'{output_file}_{dynamics}.tsv', sep='\t')
-    df_gabi['Submitter'] = 'gabriela.rribeiro'
+    df_gabi['Submitter'] = ''
     df_gabi.rename(columns={'Address1': 'Address'}, inplace=True)
     df_gabi['FASTA filename'] = f'{output_file}_{dynamics}.fasta'
     
