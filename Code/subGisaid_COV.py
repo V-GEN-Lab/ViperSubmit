@@ -29,7 +29,7 @@ def main(input_file, output_file, dynamics, fasta):
     #NOTE SUBISTITUA 'IB' FOR OR LAB ABBREVIATION
     df_final = pd.DataFrame() 
     df_exchange = pd.DataFrame()
-    df_exchange['Genome'] = df_passed_qc['Genoma']
+    df_exchange['Genome'] = df_passed_qc['Genome']
     df_exchange['Seqs'] = df_passed_qc.apply(lambda row: f"hCoV-19/country/{abbreviations.get(row['state'], '')}-IB_{row['ID']}/{row['Collection_Date'].year}", axis=1)
     
     # Fill other columns of the main DataFrame
