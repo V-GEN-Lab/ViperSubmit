@@ -8,7 +8,7 @@ import re # Library for regular expression operations
 import sys # Library for Python system interactions
 import subprocess # Library for executing system commands
 
-def main(input_file, output_file, Dynamics, fasta):
+def main(input_file, output_file, Dynamic, fasta):
     # Dictionary for segment mapping
     segments_mapping = {
         'segment_1_Coverage':'PB2',
@@ -75,7 +75,7 @@ def main(input_file, output_file, Dynamics, fasta):
         # Check if the coverage of each segment is greater than 80%
         segments_above_80 = [seg for seg, cov in row.items() if seg.startswith('segment_') and cov > 80.0]
         # Fill in the segments above 80% in the final DataFrame
-        genome_value = row['Genoma']
+        genome_value = row['Genome']
         for segment in segments_above_80:
             # Get the real name of the segment from the mapping dictionary
             segment_name = segments_mapping.get(segment, '')
@@ -95,16 +95,16 @@ def main(input_file, output_file, Dynamics, fasta):
                 
                 # Fill in the cell corresponding to the segment with the created value in df_gen_rename
                 df_gen_rename.at[index, f'Seq_Id ({segment_name})'] = cell_value
-                dados_lista_troca.append({'Genoma': genome_value, f'Seq_Id_{segment_name}': cell_value})
+                dados_lista_troca.append({'Genome': genome_value, f'Seq_Id_{segment_name}': cell_value})
 
     # Create the Lista4Troca DataFrame from the collected data
     df_lista_troca = pd.DataFrame(dados_lista_troca)
     
-    colunas_selecionadas.append('Genoma')
-    # Initialize the new 'Genoma_rename' column with empty values in the df_gen DataFrame
+    colunas_selecionadas.append('Genome')
+    # Initialize the new 'Genome_rename' column with empty values in the df_gen DataFrame
 
     for index, row in df_lista_troca.iterrows():
-        genome = row['Genoma']
+        genome = row['Genome']
         seqs = []
         segment = None
         
@@ -130,8 +130,8 @@ def main(input_file, output_file, Dynamics, fasta):
                 genome_split[0] = segments_mapping77[segment]
                 genome = "_".join(genome_split)
         
-        # Update the "Genoma" column
-        df_lista_troca.at[index, 'Genoma'] = genome
+        # Update the "Genome" column
+        df_lista_troca.at[index, 'Genome'] = genome
 
     # Remove "Seq_Id_X" columns
     df_lista_troca = df_lista_troca.drop(columns=[col for col in df_lista_troca if col.startswith("Seq_Id_")])
@@ -157,7 +157,7 @@ def main(input_file, output_file, Dynamics, fasta):
     # Generate the log
     subtype_info = df['Subtype'].unique()
     subtype_log = f'Subtypes: {", ".join(subtype_info)}\n'
-    log = f'File generated on {datetime.now()} by {getpass.getuser()}\n{subtype_log}Dynamics number: {Dynamics}\n'
+    log = f'File generated on {datetime.now()} by {getpass.getuser()}\n{subtype_log}Dynamics number: {Dynamic}\n'
 
     
     # Save the log to a text file (append mode)
@@ -165,23 +165,23 @@ def main(input_file, output_file, Dynamics, fasta):
         f.write(log)
 
     # Save the final DataFrame to a new TSV file
-    df_final.to_excel(f'{output_file}_{Dynamics}.xlsx', engine='openpyxl', index=False)
+    df_final.to_excel(f'{output_file}_{Dynamic}.xlsx', engine='openpyxl', index=False)
     
-    # Print the Dynamics number and virus type
+    # Print the Dynamic number and virus type
     print(log)
 
     
     # PART 2 - FASTA File Processing
 
-    # Generate a list with the contents of the "Genoma" column
-    genomas = df['Genoma']
+    # Generate a list with the contents of the "Genome" column
+    Genomes = df['Genome']
 
     # Get the current directory path
     pwd_output = os.getcwd()
     project_path = fasta
 
     # Save the genomes to a text file called 'list.txt'
-    genomas.to_csv('list.txt', index=False, header=False)
+    Genomes.to_csv('list.txt', index=False, header=False)
 
     # Full path to the list
     list_path = os.path.join(pwd_output, 'list.txt')  # Path to the file containing the list of files to be copied
@@ -205,7 +205,7 @@ def main(input_file, output_file, Dynamics, fasta):
     fasta_files = [file for file in os.listdir(pwd_output) if file.endswith('.fasta')]
 
     # Open the output file in write mode
-    with open(f'{output_file}_{Dynamics}_RAW.fas', 'w') as output_handle:
+    with open(f'{output_file}_{Dynamic}_RAW.fas', 'w') as output_handle:
         # Iterate over each FASTA file
         for fasta_file in fasta_files:
             # Open each FASTA file in read mode
@@ -223,15 +223,15 @@ def main(input_file, output_file, Dynamics, fasta):
 
    # PART 3 - Rename Headers in Multi-FASTA File
 
-    # Extract the values from the 'Genoma' column and remove the ">" from the FASTA headers
-    valores_tsv = df_lista_troca['Genoma'].tolist()
+    # Extract the values from the 'Genome' column and remove the ">" from the FASTA headers
+    valores_tsv = df_lista_troca['Genome'].tolist()
     valores_tsv = [header.replace(">", "") for header in valores_tsv]
 
     # List to store the corresponding sequences
     sequencias_correspondentes = []
 
     # Iterate over the sequences in the multi-FASTA file
-    for record in SeqIO.parse(f'{output_file}_{Dynamics}_RAW.fas', "fasta"):
+    for record in SeqIO.parse(f'{output_file}_{Dynamic}_RAW.fas', "fasta"):
         # Remove the ">" from the FASTA header
         fasta_header = record.id.replace(">", "")
         
@@ -252,12 +252,12 @@ def main(input_file, output_file, Dynamics, fasta):
             sequencias_correspondentes.append(record)
 
     # Write the corresponding sequences to a new multi-FASTA file
-    with open(f'{output_file}_{Dynamics}.fasta', "w") as output_handle:
+    with open(f'{output_file}_{Dynamic}.fasta', "w") as output_handle:
         SeqIO.write(sequencias_correspondentes, output_handle, "fasta")
 
     # Remove the temporary files used in the process
     os.remove('list.txt')
-    os.remove(f'{output_file}_{Dynamics}_RAW.fas')
+    os.remove(f'{output_file}_{Dynamic}_RAW.fas')
 
 
 
@@ -265,7 +265,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Processa um arquivo TSV.')
     parser.add_argument('--input', type=str, help='Caminho para o arquivo de entrada TSV')
     parser.add_argument('--output', type=str, help='Nome do arquivo de saída TSV')
-    parser.add_argument('--D', type=str, help='Número de Dynamics')
+    parser.add_argument('--D', type=str, help='Número de Dynamic')
     parser.add_argument('--fasta', type=str, required=True, help='caminho para a pastas dos fastas')
     args = parser.parse_args()
    
