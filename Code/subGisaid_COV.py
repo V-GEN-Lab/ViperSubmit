@@ -7,7 +7,7 @@ from Bio import SeqIO  # type: ignore
 import re 
 import sys
 
-def main(input_file, output_file, dinamica, fasta):
+def main(input_file, output_file, dynamics, fasta):
     # Dictionary of partners
     partner_authors = {}
 
@@ -17,7 +17,7 @@ def main(input_file, output_file, dinamica, fasta):
     # Load the TSV file into a Pandas DataFrame
     df = pd.read_csv(input_file)
     
-    df['DATA_DA_COLETA'] = pd.to_datetime(df['DATA_DA_COLETA'])
+    df['Collection_Date'] = pd.to_datetime(df['Collection_Date'])
     
     df_passed_qc = df[df['Passed_QC'] == 'A']
     
@@ -26,19 +26,20 @@ def main(input_file, output_file, dinamica, fasta):
     print("All rows with 'A' in 'Passed_QC' were filtered correctly.")
     
     # Open main DataFrame
+    #NOTE SUBISTITUA 'IB' FOR OR LAB ABBREVIATION
     df_final = pd.DataFrame() 
     df_exchange = pd.DataFrame()
     df_exchange['Genome'] = df_passed_qc['Genoma']
-    df_exchange['Seqs'] = df_passed_qc.apply(lambda row: f"hCoV-19/Brazil/{abbreviations.get(row['UNIDADE_REQUISITANTE_ESTADO'], '')}-IB_{row['CEVIVAS_ID']}/{row['DATA_DA_COLETA'].year}", axis=1)
+    df_exchange['Seqs'] = df_passed_qc.apply(lambda row: f"hCoV-19/country/{abbreviations.get(row['state'], '')}-IB_{row['ID']}/{row['Collection_Date'].year}", axis=1)
     
     # Fill other columns of the main DataFrame
     df_final['Submitter'] = ''
     df_final['FASTA filename'] = ''
-    df_final['Virus name'] = df_passed_qc.apply(lambda row: f"hCoV-19/Brazil/{abbreviations.get(row['UNIDADE_REQUISITANTE_ESTADO'], '')}-IB_{row['CEVIVAS_ID']}/{row['DATA_DA_COLETA'].year}", axis=1)
+    df_final['Virus name'] = df_passed_qc.apply(lambda row: f"hCoV-19/country/{abbreviations.get(row['state'], '')}-IB_{row['ID']}/{row['Collection_Date'].year}", axis=1)
     df_final['type'] = 'betacoronavirus'
     df_final['Passage_History'] = 'Original'
-    df_final['Collection_Date'] = df_passed_qc['DATA_DA_COLETA']
-    df_final['Location'] = df_passed_qc.apply(lambda row: f"South America / Brazil / {row['UNIDADE_REQUISITANTE_ESTADO']}", axis=1)
+    df_final['Collection_Date'] = df_passed_qc['Collection_Date']
+    df_final['Location'] = df_passed_qc.apply(lambda row: f"South America / country / {row['state']}", axis=1)
     df_final['Additional location information'] = ''
     df_final['Host'] = 'Human'
     df_final['Additional host information'] = ''
@@ -53,13 +54,13 @@ def main(input_file, output_file, dinamica, fasta):
     df_final['Sequencing technology'] = 'Illumina'
     df_final['Assembly method'] = ''
     df_final['Coverage'] = ''
-    df_final['Originating lab'] = df_passed_qc['UNIDADE_REQUISITANTE']
-    df_final['Address'] = df_passed_qc.apply(lambda row: f"{row['UNIDADE_REQUISITANTE_ESTADO']}, {abbreviations.get(row['UNIDADE_REQUISITANTE_ESTADO'], '')}", axis=1)
+    df_final['Originating lab'] = df_passed_qc['REQUESTING_UNIT']
+    df_final['Address'] = df_passed_qc.apply(lambda row: f"{row['state']}, {abbreviations.get(row['state'], '')}", axis=1)
     df_final['Sample ID given by the sample provider'] = ''
-    df_final['Submitting lab'] = 'Instituto Butantan'
-    df_final['Address1'] = 'Sao Paulo, SP'
+    df_final['Submitting lab'] = ''
+    df_final['Address1'] = ''
     df_final['Sample ID given by the submitting laboratory'] = ''
-    df_final['Authors'] = df_passed_qc.apply(lambda row: partner_authors.get(row['PARCEIRO_PROJETO'], ''), axis=1)
+    df_final['Authors'] = df_passed_qc.apply(lambda row: partner_authors.get(row['PARTNER_PROJECT'], ''), axis=1)
     df_final['Comment'] = ''
     df_final['Comment Icon'] = ''
     
@@ -67,7 +68,7 @@ def main(input_file, output_file, dinamica, fasta):
     # Print the number of dynamics and the virus type
     Serptype_info = df_final['type'].unique()
     subtype_log = f'Subtypes: {", ".join(map(str, Serptype_info))}\n'
-    log = f'File generated on {datetime.now()} by {getpass.getuser()}\n{subtype_log}Number of dynamics: {dinamica}\n'
+    log = f'File generated on {datetime.now()} by {getpass.getuser()}\n{subtype_log}Number of dynamics: {dynamics}\n'
 
     # Save the log in a text file (append mode)
     with open(f'Sub_COV_log.txt', 'a') as f:
@@ -75,7 +76,7 @@ def main(input_file, output_file, dinamica, fasta):
 
     # Add the extra columns requested by GISAID and arrange the other columns
     desired_columns = [
-    'submitter1', 'fn', 'covv_virus_name', 'covv_type', 'covv_passage', 'covv_collection_date',
+    'submitter', 'fn', 'covv_virus_name', 'covv_type', 'covv_passage', 'covv_collection_date',
     'covv_location', 'covv_add_location', 'covv_host', 'covv_add_host_info', 'covv_sampling_strategy',
     'covv_gender', 'covv_patient_age', 'covv_patient_status', 'covv_specimen', 'covv_outbreak',
     'covv_last_vaccinated', 'covv_treatment', 'covv_seq_technology', 'covv_assembly_method', 
@@ -83,20 +84,20 @@ def main(input_file, output_file, dinamica, fasta):
     'covv_subm_lab_addr', 'covv_subm_sample_id', 'covv_authors', 'covv_comment', 'comment_type'
     ]
     
-    df_final.to_csv(f'{output_file}_{dinamica}.tsv', sep='\t', index=False)
-    df_gabi = pd.read_csv(f'{output_file}_{dinamica}.tsv', sep='\t')
+    df_final.to_csv(f'{output_file}_{dynamics}.tsv', sep='\t', index=False)
+    df_gabi = pd.read_csv(f'{output_file}_{dynamics}.tsv', sep='\t')
     df_gabi['Submitter'] = 'gabriela.rribeiro'
     df_gabi.rename(columns={'Address1': 'Address'}, inplace=True)
-    df_gabi['FASTA filename'] = f'{output_file}_{dinamica}.fasta'
+    df_gabi['FASTA filename'] = f'{output_file}_{dynamics}.fasta'
     
     # Transform the file into Excel and remove temporary files
     df_gabi = df_gabi.T.reset_index().T 
 
     df_gabi.columns = desired_columns
 
-    df_gabi.to_excel(f'{output_file}_{dinamica}.xlsx', engine='openpyxl', index=False)
+    df_gabi.to_excel(f'{output_file}_{dynamics}.xlsx', engine='openpyxl', index=False)
 
-    os.remove(f'{output_file}_{dinamica}.tsv')
+    os.remove(f'{output_file}_{dynamics}.tsv')
 
     
     print(log)
@@ -131,7 +132,7 @@ def main(input_file, output_file, dinamica, fasta):
     os.chdir(pwd_output)
 
     # Create the FASTA file path
-    fas_file = f'{output_file}_{dinamica}_RAW.fas'
+    fas_file = f'{output_file}_{dynamics}_RAW.fas'
 
     # List of FASTA files in the output directory
     fasta_files = [file for file in os.listdir(pwd_output) if file.endswith('.fasta')]
@@ -178,7 +179,7 @@ def main(input_file, output_file, dinamica, fasta):
     sequencias_correspondentes = []
 
     # Iterate over sequences in the multi-FASTA file
-    for record in SeqIO.parse(f'{output_file}_{dinamica}_RAW.fas', "fasta"):
+    for record in SeqIO.parse(f'{output_file}_{dynamics}_RAW.fas', "fasta"):
         # Remove ">" from the FASTA file header
         fasta_header = record.id.replace(">", "")
 
@@ -199,14 +200,14 @@ def main(input_file, output_file, dinamica, fasta):
             sequencias_correspondentes.append(record)
 
     # Write the modified FASTA file
-    with open(f'{output_file}_{dinamica}.fasta', "w") as output_handle:
+    with open(f'{output_file}_{dynamics}.fasta', "w") as output_handle:
         SeqIO.write(sequencias_correspondentes, output_handle, "fasta")
 
     # Remove temporary files
     os.remove('list.txt')
-    os.remove(f'{output_file}_{dinamica}_RAW.fas')
+    os.remove(f'{output_file}_{dynamics}_RAW.fas')
 
-    print(f'Dynamics {dinamica} completed.')
+    print(f'Dynamics {dynamics} completed.')
 
 
 if __name__ == "__main__":
