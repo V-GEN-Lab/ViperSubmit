@@ -64,7 +64,6 @@ License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 Contact
+For questions or suggestions, please open an issue or contact the project maintainers: iago.lima.esib@esib.butantan.gov.br or iagottlima@gmail.com
 
-For questions or suggestions, please open an issue or contact the project maintainers.
-
-Feel free to customize this README according to your project's specific requirements and guidelines.
+Feel free to customize the script according to your project's specific requirements and guidelines.
