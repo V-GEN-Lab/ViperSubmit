@@ -29,11 +29,11 @@ def main(input_file, output_file, Dynamic, fasta):
 
     # Initialize DataFrames for final result and genome exchange
     df_final = pd.DataFrame() 
-    df_troca = pd.DataFrame()
+    df_exchange = pd.DataFrame()
     
     # Create 'Seqs' column with formatted data from existing columns
-    df_troca['Genome'] = df_passed_qc['Genome']
-    df_troca['Seqs'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/country/{siglas.get(row['state'], '')}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
+    df_exchange['Genome'] = df_passed_qc['Genome']
+    df_exchange['Seqs'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/country/{siglas.get(row['state'], '')}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
     
     # Populate other columns of the final DataFrame
     df_final['Submitter'] = ''
@@ -188,8 +188,8 @@ def main(input_file, output_file, Dynamic, fasta):
     print(f"Successfully created single multi-FASTA file {fas_file} in {pwd_output}.")
 
         # Generate lists from DataFrame columns
-    valores_genoma = df_troca['Genoma'].tolist()
-    valores_virus_name = df_troca['Seqs'].tolist()
+    valores_genoma = df_exchange['Genoma'].tolist()
+    valores_virus_name = df_exchange['Seqs'].tolist()
 
     # List to store corresponding sequences
     sequencias_correspondentes = []
