@@ -33,7 +33,7 @@ def main(input_file, output_file, Dynamic, fasta):
     
     # Create 'Seqs' column with formatted data from existing columns
     df_troca['Genome'] = df_passed_qc['Genome']
-    df_troca['Seqs'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/Brazil/{siglas.get(row['state'], '')}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
+    df_troca['Seqs'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/country/{siglas.get(row['state'], '')}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
     
     # Populate other columns of the final DataFrame
     df_final['Submitter'] = ''
