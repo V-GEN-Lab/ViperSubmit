@@ -232,4 +232,4 @@ def main(input_file, output_file, Dynamic, fasta):
     args = parser.parse_args()
    
     # Chama a função principal com os argumentos fornecidos
-    main(args.input, args.output, args.D)
+    main(args.input, args.output, args.D, args.fasta)
