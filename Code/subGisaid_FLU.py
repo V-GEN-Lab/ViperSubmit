@@ -269,7 +269,7 @@ if __name__ == "__main__":
     parser.add_argument('--fasta', type=str, required=True, help='caminho para a pastas dos fastas')
     args = parser.parse_args()
    
-    main(args.input, args.output, args.D)
+    main(args.input, args.output, args.D, args.fasta)
 
 
 
