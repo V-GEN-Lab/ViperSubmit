@@ -64,7 +64,7 @@ def main(input_file, output_file, Dynamic, fasta):
                                                       'Note', 'PMID'])
     
     colunas_selecionadas = []
-    dados_lista_troca = [] 
+    dados_exchange = [] 
     df['Collection_Date'] = pd.to_datetime(df['Collection_Date'])
     
     # Create an empty DataFrame to store the results
@@ -95,21 +95,21 @@ def main(input_file, output_file, Dynamic, fasta):
                 
                 # Fill in the cell corresponding to the segment with the created value in df_gen_rename
                 df_gen_rename.at[index, f'Seq_Id ({segment_name})'] = cell_value
-                dados_lista_troca.append({'Genome': genome_value, f'Seq_Id_{segment_name}': cell_value})
+                dados_exchange.append({'Genome': genome_value, f'Seq_Id_{segment_name}': cell_value})
 
     # Create the Lista4Troca DataFrame from the collected data
-    df_lista_troca = pd.DataFrame(dados_lista_troca)
+    df_exchange = pd.DataFrame(dados_exchange)
     
     colunas_selecionadas.append('Genome')
     # Initialize the new 'Genome_rename' column with empty values in the df_gen DataFrame
 
-    for index, row in df_lista_troca.iterrows():
+    for index, row in df_exchange.iterrows():
         genome = row['Genome']
         seqs = []
         segment = None
         
         # Look for the segment in the "Seq_Id_X" columns and concatenate them
-        for column in df_lista_troca.columns:
+        for column in df_exchange.columns:
             if column.startswith("Seq_Id_"):
                 column_value = row[column]
                 if not pd.isnull(column_value):
@@ -121,7 +121,7 @@ def main(input_file, output_file, Dynamic, fasta):
         seqs_combined = "_".join(seqs)
         
         # Update the "Seqs" column
-        df_lista_troca.at[index, 'Seqs'] = seqs_combined
+        df_exchange.at[index, 'Seqs'] = seqs_combined
         
         # Rename the segment in the Genome
         if segment is not None:
@@ -131,10 +131,10 @@ def main(input_file, output_file, Dynamic, fasta):
                 genome = "_".join(genome_split)
         
         # Update the "Genome" column
-        df_lista_troca.at[index, 'Genome'] = genome
+        df_exchange.at[index, 'Genome'] = genome
 
     # Remove "Seq_Id_X" columns
-    df_lista_troca = df_lista_troca.drop(columns=[col for col in df_lista_troca if col.startswith("Seq_Id_")])
+    df_exchange = df_exchange.drop(columns=[col for col in df_exchange if col.startswith("Seq_Id_")])
     
     # Fill in other columns of the final DataFrame
     df_final['Isolate_Id'] = ''
@@ -224,7 +224,7 @@ def main(input_file, output_file, Dynamic, fasta):
    # PART 3 - Rename Headers in Multi-FASTA File
 
     # Extract the values from the 'Genome' column and remove the ">" from the FASTA headers
-    valores_tsv = df_lista_troca['Genome'].tolist()
+    valores_tsv = df_exchange['Genome'].tolist()
     valores_tsv = [header.replace(">", "") for header in valores_tsv]
 
     # List to store the corresponding sequences
@@ -241,7 +241,7 @@ def main(input_file, output_file, Dynamic, fasta):
             index = valores_tsv.index(fasta_header)
             
             # Get the new header from the "Seqs" column in the DataFrame
-            novo_cabecalho = df_lista_troca.at[index, 'Seqs']
+            novo_cabecalho = df_exchange.at[index, 'Seqs']
             
             # Replace the original header with the new header
             record.id = novo_cabecalho
