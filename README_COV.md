@@ -18,8 +18,6 @@ Script Explanation
     Author Names:
         Define the partner_authors dictionary with the names of the authors.
 
-        python
-
     partner_authors = {
         # Example:
         # 'LabName': "Author1, LastName; Author2, LastName; ..."
@@ -29,7 +27,6 @@ State Abbreviations:
 
     Define the abbreviations dictionary with the state names and their corresponding abbreviations.
 
-    python
 
     abbreviations = {
         # Example:
