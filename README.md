@@ -3,28 +3,29 @@ GISAID Submission Method
 This repository contains scripts for the GISAID submission of Influenza viruses (H1N1, H3N2, Vic/Yamagata), Dengue (DENV), and SARS-CoV (COV).
 Files in the Code Folder
 
-The Code folder contains three scripts and tree guides for file manipulation:
+Here is the translated and formatted text for README.md on GitHub:
 
-    Influenza: subGisaid_FLU.py and README_FLU.md
-    Dengue: subGisaid_DENV.py and README_DENV.md
-    SARS-CoV: subGisaid_COV.py and README_COV.md
+markdown
 
-Script Arguments
+# Usage and Installation Guide
 
-Each of the three scripts requires four arguments to function:
+## Requirements to Run the Script:
+- The script for the desired virus.
+- An edited CSV as provided in the example (if possible, edit the example file with your data).
+- Python 3.
+- The necessary libraries specified in the script.
 
-    --input: The CSV file (METADATA)
-    --output: The desired final file name
-    --D: The dynamic number
-    --fasta: The complete path to the FASTA files related to the inserted CSV
+## Installation Steps:
+If you do not have Python or the required libraries, use the following commands:
+```sh
+sudo apt-get update
+sudo apt-get install python
+sudo apt-get install python-pip
+pip install pandas biopython
+```
+Usage:
 
-Log Files
-
-The scripts generate log files containing:
-
-    The types and subtypes of the viruses in the CSV
-    The dynamic number
-    The date (day, month, year, hour)
+For the usage of each script, refer to the specific guide in the GUIDE folder.
 
 Recommendations
 Consistent Folder Usage: Always run the scripts in the same folder to ensure the log file is continuously updated. Running the script in a new folder will create a new log.
