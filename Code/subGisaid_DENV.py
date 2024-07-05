@@ -7,13 +7,7 @@ from Bio import SeqIO  # Import Bio.SeqIO library for FASTA file handling
 import re  # Import re library for regular expressions
 import sys  # Import sys library to exit the program
 
-def main(input_file, output_file, Dynamic, fasta):
-    # Dictionary mapping authors by partner
-    autores_por_parceiro = {}
-
-    # Dictionary of state abbreviations
-    siglas = {}
-
+def main(input_file, output_file, Dynamic, fasta, country, continent):
     # Load the TSV file into a Pandas DataFrame
     df = pd.read_csv(input_file, encoding='latin-1')
     
@@ -33,18 +27,18 @@ def main(input_file, output_file, Dynamic, fasta):
     
     # Create 'Seqs' column with formatted data from existing columns
     df_exchange['Genome'] = df_passed_qc['Genome']
-    df_exchange['Seqs'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/country/{siglas.get(row['state'], '')}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
+    df_exchange['Seqs'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/{country}/{(row['Abbreviations'])}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
     
     # Populate other columns of the final DataFrame
     df_final['Submitter'] = ''
     df_final['FASTA filename'] = f'{output_file}_{Dynamic}.fasta'
-    df_final['Virus name'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/country/{siglas.get(row['state'], '')}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
+    df_final['Virus name'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/{country}/{(row['Abbreviations'])}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
     df_final['type'] = 'Dengue Virus'
     df_final['Serotype'] = df_passed_qc.apply(lambda row: f"DENV{row['Serotype']}", axis=1)
     df_final['Host'] = 'Human'
     df_final['Passage details/history'] = 'Original'
     df_final['Collection_Date'] = df_passed_qc['Collection_Date'].dt.date
-    df_final['Location'] = df_passed_qc.apply(lambda row: f"continent / country / {row['state']}", axis=1)
+    df_final['Location'] = df_passed_qc.apply(lambda row: f"{continent} / {country} / {row['REQUESTING_STATE']}", axis=1)
     df_final['Additional location information'] = ''
     df_final['Additional host information'] = ''
     df_final['Sampling Strategy'] = ''
@@ -63,12 +57,12 @@ def main(input_file, output_file, Dynamic, fasta):
     df_final['Depth of coverage'] = ''
     df_final['Publications'] = ''
     df_final['Originating lab'] = df_passed_qc['REQUESTING_UNIT'] 
-    df_final['Address'] = df_passed_qc.apply(lambda row: f"{row['state']}, {siglas.get(row['state'], '')}", axis=1)
+    df_final['Address'] = df_passed_qc.apply(lambda row: f"{row['state']},{(row['Abbreviations'])}", axis=1)
     df_final['Sample ID given by the sample provider'] = ''
     df_final['Submitting lab'] = ''
     df_final['Address1'] = ''
     df_final['Sample ID given by the submitting laboratory'] = ''
-    df_final['Authors'] = df_passed_qc.apply(lambda row: autores_por_parceiro.get(row['PARTNER_PROJECT'], ''), axis=1)
+    df_final['Authors'] = df_passed_qc['Authors']
     df_final['Comment'] = ''
     df_final['Comment Icon'] = ''
     
@@ -229,7 +223,9 @@ def main(input_file, output_file, Dynamic, fasta):
     parser.add_argument('--output', type=str, required=True, help='Nome do arquivo de saída TSV')
     parser.add_argument('--D', type=str, required=True, help='Número de dinâmica')
     parser.add_argument('--fasta', type=str, required=True, help='caminho para a pastas dos fastas')
+    parser.add_argument('--country', type=str, required=True, help='Número de dinâmica')
+    parser.add_argument('--continent', type=str, required=True, help='Número de dinâmica')
     args = parser.parse_args()
    
-    # Chama a função principal com os argumentos fornecidos
-    main(args.input, args.output, args.D, args.fasta)
+    main(args.input, args.output, args.D, args.fasta, args.country, args.continent)
+   
