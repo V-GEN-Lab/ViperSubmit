@@ -7,12 +7,12 @@ from Bio import SeqIO  # type: ignore
 import re 
 import sys
 
-def main(input_file, output_file, dynamics, fasta):
+def main(input_file, output_file, dynamics, fasta, country, continent):
     # Dictionary of partners
-    partner_authors = {}
+    
 
     # Dictionary of abbreviations
-    abbreviations = {}
+    
     
     # Load the TSV file into a Pandas DataFrame
     df = pd.read_csv(input_file)
@@ -30,16 +30,16 @@ def main(input_file, output_file, dynamics, fasta):
     df_final = pd.DataFrame() 
     df_exchange = pd.DataFrame()
     df_exchange['Genome'] = df_passed_qc['Genome']
-    df_exchange['Seqs'] = df_passed_qc.apply(lambda row: f"hCoV-19/country/{abbreviations.get(row['state'], '')}-IB_{row['ID']}/{row['Collection_Date'].year}", axis=1)
+    df_exchange['Seqs'] = df_passed_qc.apply(lambda row: f"hCoV-19/{country}/{[row]['Abbreviations']}-IB_{row['ID']}/{row['Collection_Date'].year}", axis=1)
     
     # Fill other columns of the main DataFrame
     df_final['Submitter'] = ''
     df_final['FASTA filename'] = ''
-    df_final['Virus name'] = df_passed_qc.apply(lambda row: f"hCoV-19/country/{abbreviations.get(row['state'], '')}-IB_{row['ID']}/{row['Collection_Date'].year}", axis=1)
+    df_final['Virus name'] = df_passed_qc.apply(lambda row: f"hCoV-19/{country}/{(row['Abbreviations'])}-IB_{row['ID']}/{row['Collection_Date'].year}", axis=1)
     df_final['type'] = 'betacoronavirus'
     df_final['Passage_History'] = 'Original'
     df_final['Collection_Date'] = df_passed_qc['Collection_Date']
-    df_final['Location'] = df_passed_qc.apply(lambda row: f"continent / country / {row['state']}", axis=1)
+    df_final['Location'] = df_passed_qc.apply(lambda row: f"{continent} / {country} / {row['state']}", axis=1)
     df_final['Additional location information'] = ''
     df_final['Host'] = 'Human'
     df_final['Additional host information'] = ''
@@ -55,18 +55,18 @@ def main(input_file, output_file, dynamics, fasta):
     df_final['Assembly method'] = ''
     df_final['Coverage'] = ''
     df_final['Originating lab'] = df_passed_qc['REQUESTING_UNIT']
-    df_final['Address'] = df_passed_qc.apply(lambda row: f"{row['state']}, {abbreviations.get(row['state'], '')}", axis=1)
+    df_final['Address'] = df_passed_qc.apply(lambda row: f"{row['state']}, {(row['Abbreviations'], '')}", axis=1)
     df_final['Sample ID given by the sample provider'] = ''
     df_final['Submitting lab'] = ''
     df_final['Address1'] = ''
     df_final['Sample ID given by the submitting laboratory'] = ''
-    df_final['Authors'] = df_passed_qc.apply(lambda row: partner_authors.get(row['PARTNER_PROJECT'], ''), axis=1)
+    df_final['Authors'] = df_passed_qc['Authors']
     df_final['Comment'] = ''
     df_final['Comment Icon'] = ''
     
     # Generate the log
     # Print the number of dynamics and the virus type
-    Serptype_info = df_final['type'].unique()
+    Serptype_info = df_final['Pangolin_lineage'].unique()
     subtype_log = f'Subtypes: {", ".join(map(str, Serptype_info))}\n'
     log = f'File generated on {datetime.now()} by {getpass.getuser()}\n{subtype_log}Number of dynamics: {dynamics}\n'
 
@@ -216,8 +216,10 @@ if __name__ == "__main__":
     parser.add_argument('--output', type=str, required=True, help='Nome do arquivo de saída TSV')
     parser.add_argument('--D', type=str, required=True, help='Número de dinâmica')
     parser.add_argument('--fasta', type=str, required=True, help='Número de dinâmica')
+    parser.add_argument('--country', type=str, required=True, help='Número de dinâmica')
+    parser.add_argument('--continent', type=str, required=True, help='Número de dinâmica')
     args = parser.parse_args()
    
-    main(args.input, args.output, args.D, args.fasta)
+    main(args.input, args.output, args.D, args.fasta, args.country, args.continent)
 
 
