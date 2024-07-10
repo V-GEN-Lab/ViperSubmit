@@ -1,0 +1,5 @@
+ID,Genome,Serotype,Genotype,Passed_QC,PARTNER_PROJECT,REQUESTING_UNIT,REQUESTING_STATE,Abbreviations,Collection_Date,REQUESTING_SEQ,Authors
+CEVD_2400255,Genoma_DENV__DENV-SE1424-FB-FBD0067-P-A-GC_S44__Butantan_23-04-2024_SE1624.fasta,1,DENV1/V,A,FB,INSTITUTO BUTANTAN,SAO PAULO,SP,2024-04-01,INSTITUTO BUTANTAN,"Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni"
+CEVD_2400295,Genoma_DENV__DENV-SE1524-FB-FBD0086-P-A-GC_S156__Butantan_26-04-2024_SE1724.fasta,1,DENV1/V,A,FB,INSTITUTO BUTANTAN,SAO PAULO,SP,2024-04-08,INSTITUTO BUTANTAN,"Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni"
+CEVD_2400291,Genoma_DENV__DENV-SE1624-FB-FBD0114-P-A-GC_S165__Butantan_26-04-2024_SE1724.fasta,2,DENV2/C,A,FB,INSTITUTO BUTANTAN,SAO PAULO,SP,2024-04-15,INSTITUTO BUTANTAN,"Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni"
+CEVD_2200299,Genoma_DENV__DENV_SE47-22_ZOONOSE-SP_2022-0228_R_A_GC_S35__ReRun_03-04-2023__SE00.fasta,2,DENV2/AA,A,ZOOSP,UBS J JOAMAR,SAO PAULO,SP,2021-06-10,INSTITUTO BUTANTAN ,"Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Luciano, Oliveira; Sumire, Hibi; Isabelle, Ferreira; Melissa, Palmieri; Eduardo, Mais"
