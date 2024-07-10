@@ -33,7 +33,7 @@ In the CSV folder, I have provided 3 CSV files with the necessary columns to run
 
 
 > **For any questions or suggestions, please contact the CEVIVAS team or send an email to: iago.lima.esib@esib.butantan.br or iagottlima@gmail.com.**
-
+<details>
 <summary>README_FLU</summary>
 Explanations
 
@@ -87,7 +87,7 @@ To contribute to this project, please fork the repository, create a new branch f
 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-Contact
+<details>
 
 For questions or suggestions, please open an issue or contact the project maintainers: iago.lima.esib@esib.butantan.gov.br or iagottlima@gmail.com
 
