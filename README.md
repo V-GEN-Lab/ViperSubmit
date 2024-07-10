@@ -199,12 +199,3 @@ Sequencing Technology:
         df_final['Sequencing technology'] = 'Illumina'
 
 </details>
-
-
-Feel free to customize the script according to your project's specific requirements and guidelines.
-
-
-For questions or suggestions, please open an issue or contact the project maintainers: iago.lima.esib@esib.butantan.gov.br or iagottlima@gmail.com
-
-Feel free to customize the script according to your project's specific requirements and guidelines.
-</details>
