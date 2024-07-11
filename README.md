@@ -65,26 +65,6 @@ Script Explanation
 Genome Column:
 
 In the column Genome, please include the name that is in the sample's FASTA file. Each sample should have a different FASTA file.
-Author Information:
-
-Define the partner_authors dictionary with the names of the authors.
-
-python
-
-partner_authors = {
-  'LACENPA': "Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Gleissy, Borges; Kátia, Furtado; Shirley, Chagas; Patrícia, Costa"
-}
-
-It is necessary to put where these authors are from in the column PARTNER_PROJECT, as the script checks to include other authors based on the lab name. If it is only one lab, put the lab name and the authors.
-Country of Origin:
-
-Set the country of origin in the DataFrame as follows:
-
-python
-
-df_final['Location'] = 'country'
-
-Replace 'country' with the actual country of origin.
 </details>
 
 <details>
@@ -103,49 +83,7 @@ Data Columns
     REQUESTING_UNIT: The name of partner laboratories (if not applicable, put the name of your lab)
     PARTNER_PROJECT: Partner's name (if not applicable, just put the name of your lab)
 
-Script Explanation
 
-    Author Names:
-        Define the partner_authors dictionary with the names of the authors.
-
-    partner_authors = {
-        # Example:
-        # 'LabName': "Author1, LastName; Author2, LastName; ..."
-    }
-
-State Abbreviations:
-
-    Define the abbreviations dictionary with the state names and their corresponding abbreviations.
-
-
-    abbreviations = {
-        # Example:
-        # 'StateName': 'Abbreviation'
-    }
-
-Sequence Naming:
-
-    In the df_exchange['Seqs'] column, replace 'country' with your actual country and use the appropriate state abbreviation from the abbreviations dictionary.
-
-    python
-
-    df_exchange['Seqs'] = df_passed_qc.apply(lambda row: f"hCoV-19/country/{abbreviations.get(row['state'], '')}-IB_{row['ID']}/{row['Collection_Date'].year}", axis=1)
-
-Location Column:
-
-    In the df_final['Location'] column, replace 'continent' and 'country' with the actual continent and country of origin.
-
-    python
-
-    df_final['Location'] = df_passed_qc.apply(lambda row: f"continent / country / {row['state']}", axis=1)
-
-Sequencing Technology:
-
-    Set the sequencing technology used. By default, it is 'Illumina'. Replace 'Illumina' with your sequencer if different.
-
-    python
-
-        df_final['Sequencing technology'] = 'Illumina'
 </details>
 <details>
   <summary>README_DENV</summary>
@@ -164,38 +102,5 @@ Data Columns
     Collection_Date: Collection date
     REQUESTING_UNIT: The name of partner laboratories (if not applicable, put the name of your lab)
     PARTNER_PROJECT: Partner's name (if not applicable, just put the name of your lab)
-
-Script Explanation
-
-    Location Column:
-        In the df_final['Location'] column, replace 'continent' and 'country' with the actual continent and country of origin.
-
-        python
-
-    df_final['Location'] = df_passed_qc.apply(lambda row: f"continent / country / {row['state']}", axis=1)
-
-Sequence Naming:
-
-    In the df_troca['Seqs'] column, replace 'country' with the actual country of origin and use the appropriate state abbreviation from the siglas dictionary.
-
-    python
-
-    df_troca['Seqs'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/country/{siglas.get(row['state'], '')}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
-
-Virus Naming:
-
-    Similarly, for the df_final['Virus name'] column, replace 'country' with the actual country of origin and use the appropriate state abbreviation from the siglas dictionary.
-
-    python
-
-    df_final['Virus name'] = df_passed_qc.apply(lambda row: f"hDenV{row['Serotype']}/country/{siglas.get(row['state'], '')}-{row['ID']}/{row['Collection_Date'].year}", axis=1)
-
-Sequencing Technology:
-
-    Set the sequencing technology used. By default, it is 'Illumina'. Replace 'Illumina' with your sequencer if different.
-
-    python
-
-        df_final['Sequencing technology'] = 'Illumina'
 
 </details>
