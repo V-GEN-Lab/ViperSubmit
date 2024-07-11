@@ -23,9 +23,13 @@
   ```sh
   sudo apt-get update
   sudo apt-get install python3
-  sudo apt-get install python3-pip
+  sudo apt-get install python3-pip python3-venv
+  python3 -m venv myenv(name of your  virtual environment)
+  source myenv/bin/activate
+  myenv\Scripts\activate
   pip install pandas biopython
   ```
+Now you have an environment to run the script. Always remember to activate the environment before running the script.
 Recommendations:
 
 Consistent Folder Usage: Always run the scripts in the same folder to ensure the log file is continuously updated. Running the script in a new folder will create a new log.
