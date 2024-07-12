@@ -29,17 +29,14 @@
   myenv\Scripts\activate
   pip install pandas biopython
   ```
-  Improved Version
-
   You now have an environment to run the script. Always remember to activate the environment before running it.
 
   Recommendations:
 
   Consistent Folder Usage: Always run the scripts in the same folder to ensure the log file is continuously updated. Running the script in a new folder will create a new log.
 
-  Dedicated Folder: Create a dedicated folder to run the scripts. The script combines all FASTA files related to the CSV and outputs the final FASTA. To prevent the script from accidentally deleting the final FASTA, move it to another folder after generation. Since the script stores all intermediate FASTA files in the folder and deletes    them after use, ALWAYS move the final files to a new folder (e.g., final_files) for better code functionality.
-
-  In the Supplementary_files folder, I have provided examples of CSV and FASTA files with the necessary columns to run each script. Using these tables, the script should work without any issues. Please fill in the data in these tables using the guide provided for each script as previously mentioned.
+ Dedicated Folder: Create a dedicated folder to run the scripts. The script combines all FASTA files related to the CSV and outputs a final FASTA file. To prevent accidental deletion of the final FASTA, move it to a separate folder after generation. Since the script stores all intermediate FASTA files in the working folder and deletes     them after use, ALWAYS move the final files to a different folder (e.g., final_files) to ensure better code functionality and data safety.
+ In the Supplementary_files folder, I have provided examples of CSV and FASTA files with the necessary columns to run each script. Using these tables, the script should work without any issues. Please fill in the data in these tables using the guide provided for each script as previously mentioned.
 
   For any questions or suggestions, please contact the CEVIVAS team or send an email to: iago.lima.esib@esib.butantan.br or iagottlima@gmail.com.
 
