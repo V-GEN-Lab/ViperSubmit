@@ -27,7 +27,8 @@
   python3 -m venv myenv(name of your  virtual environment)
   source myenv/bin/activate
   myenv\Scripts\activate
-  pip install pandas biopython
+  pip install pandas biopython openpyxl
+
   ```
   You now have an environment to run the script. Always remember to activate the environment before running it.
 
@@ -44,8 +45,14 @@
 </details>
 <details>
   <summary>README_FLU</summary>
+  Imagem do comando
 Explanations
-
+ ```sh
+ ative o ambiente 
+ python3 -m venv (nome do seu ambiente)
+ source (nome do seu ambiente)/bin/activate
+ ```
+  
 This README provides an overview of the data columns and script requirements for the SG-FLU project.
 Data Columns
 
