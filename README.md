@@ -90,7 +90,7 @@ To activate the environment, use the terminal. For example, if you named the env
 - **FASTA Folder:** 
   - Create a specific folder for the FASTA files.
   - This will simplify the script’s task of locating the FASTA files, as demonstrated in the provided example.
-
+</details>
 
 For any questions or suggestions, please contact the CEVIVAS team or send an email to: iago.lima.esib@esib.butantan.br or iagottlima@gmail.com.
 
