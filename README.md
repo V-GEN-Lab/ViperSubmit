@@ -59,15 +59,18 @@
 
   Please follow the README file above for the specific virus:
 
-    readme_FLU for Influenza
-    readme_COV for SARS-CoV-2
-    readme_DENV for Dengue
+  Readme_FLU for Influenza : [Readme_FLU](#Readme_flu)
+  
+  Readme_COV for SARS-CoV-2
+  
+  Readme_DENV for Dengue
+  
     
 
 </details>
 <details>
   <summary>README_FLU</summary>
-
+#Readme_FLU
 This README provides an overview of the data columns and script requirements for the SG-FLU project.
 
    Data Columns
