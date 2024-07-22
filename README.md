@@ -86,7 +86,7 @@
 
 </details>
 
-  Please follow the README file above for the specific virus:
+  Please follow the README file below for the specific virus
 
 <details>
   <summary>README_FLU for Influenza:</summary>
