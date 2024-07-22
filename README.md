@@ -114,7 +114,7 @@ This README provides an overview of the data columns and script requirements for
 - **Authors:** Name of the authors (please follow the example)
 
 To execute the influenza scripts, use the command below: <br />
-(Don’t forget to activate the conda environment)
+> _Don’t forget to activate the conda environment_
 
  ```sh
    python3 subGisaid_FLU.py --input  --output  --D --fasta  --cover
