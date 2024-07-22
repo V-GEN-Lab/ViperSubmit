@@ -62,6 +62,7 @@ Make sure that the folders have been created correctly. You now have an environm
 
 To activate the environment, use the terminal. For example, if you named the environment 'myenv', you should see the environment name next to the username/computer name in the terminal prompt. Ensure you activate the environment before running the script.
 
+
 <p align="center">
     <img src="./Pictures/envEX3.png" alt="ENV3" />
     <br />
@@ -70,14 +71,25 @@ To activate the environment, use the terminal. For example, if you named the env
 </details>
 
 
-  Recommendations:
+ **Recommendations:**
 
-  Consistent Folder Usage: Always run the scripts in the same folder to ensure the log file is continuously updated. Running the script in a new folder will create a new log.
+- **Consistent Folder Usage:** Always run the scripts in the same folder to ensure that the log file is continuously updated. Running the script in a new folder will create a new log file.
 
- Dedicated Folder: Create a dedicated folder to run the scripts. The script combines all FASTA files related to the CSV and outputs a final FASTA file. To prevent accidental deletion of the final FASTA, move it to a separate folder after generation. Since the script stores all intermediate FASTA files in the working folder and deletes     them after use, ALWAYS move the final files to a different folder (e.g., final_files) to ensure better code functionality and data safety.
- In the Supplementary_files folder, I have provided examples of CSV and FASTA files with the necessary columns to run each script. Using these tables, the script should work without any issues. Please fill in the data in these tables using the guide provided for each script as previously mentioned.
- 
- Fasta Folder: Please create a folder for the FASTA files; this will facilitate the usage of the script when it searches for the FASTA files, like the example provided.
+- **Dedicated Folder:** 
+  - Create a dedicated folder for running the scripts. 
+  - The script processes all FASTA files related to the CSV input and generates a final FASTA file.
+  - To avoid accidental deletion of the final FASTA file, move it to a separate folder after it is generated. 
+  - The script stores all intermediate FASTA files in the working folder and deletes them after use. 
+  - To maintain better code functionality and data safety, **always move the final FASTA files** to a different folder (e.g., `final_files`).
+
+- **Supplementary Files:** 
+  - In the `Supplementary_files` folder, you will find example CSV and FASTA files with the required columns for running each script.
+  - Use these examples to ensure the script works correctly. 
+  - Fill in the data according to the guide provided for each script.
+
+- **FASTA Folder:** 
+  - Create a specific folder for the FASTA files.
+  - This will simplify the script’s task of locating the FASTA files, as demonstrated in the provided example.
 
  
   For any questions or suggestions, please contact the CEVIVAS team or send an email to: iago.lima.esib@esib.butantan.br or iagottlima@gmail.com.
