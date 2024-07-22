@@ -57,6 +57,13 @@
 
   Windows option coming soon...
 
+  Please follow the README file above for the specific virus:
+
+    readme_FLU for Influenza
+    readme_COV for SARS-CoV-2
+    readme_DENV for Dengue
+    
+
 </details>
 <details>
   <summary>README_FLU</summary>
