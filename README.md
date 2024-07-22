@@ -59,15 +59,8 @@
 
   Please follow the README file above for the specific virus:
 
-  Readme_FLU for Influenza : [Readme_FLU](#Readme_FLU)
-  
-  Readme_COV for SARS-CoV-2
-  
-  Readme_DENV for Dengue
-  
-    
-
 </details>
+Readme_FLU for Influenza:
 <details>
   <summary>README_FLU</summary>
 #Readme_FLU
@@ -120,7 +113,7 @@ Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should 
 
 
 </details>
-
+ Readme_COV for SARS-CoV-2
 <details>
   <summary>README_COV</summary>
 Explanations
@@ -183,6 +176,7 @@ Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should 
 
 
 <details>
+  Readme_DENV for Dengue
   <summary>README_DENV</summary>
   SG-DENV README
 Explanations
