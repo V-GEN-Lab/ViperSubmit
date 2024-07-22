@@ -51,7 +51,7 @@
  In the Supplementary_files folder, I have provided examples of CSV and FASTA files with the necessary columns to run each script. Using these tables, the script should work without any issues. Please fill in the data in these tables using the guide provided for each script as previously mentioned.
 
   For any questions or suggestions, please contact the CEVIVAS team or send an email to: iago.lima.esib@esib.butantan.br or iagottlima@gmail.com.
-
+Windows option coming soon...
 
 </details>
 <details>
@@ -126,17 +126,17 @@ Data Columns
     Authors: Names of the authors (please follow the example)
     Country: Your country
     Continent: Your continent
+    
+  Script Arguments
+  ![codeCOV2](./Pictures/covEX.png)
+    --input: The CSV file with your data
+    --output: Name of the output file
+    --D: Number of the dynamic
+    --fasta: Path to the folder with FASTA files
+    --cover: Percentage of coverage of segments you want
 
 
-
-  --input: The CSV file with your data
-  --output: Name of the output file
-  --D: Number of the dynamic
-  --fasta: Path to the folder with FASTA files
-  --cover: Percentage of coverage of segments you want
-
-
-    python3 subGisaid_COV.py --input  --output  --D --fasta  --cover 
+    python3 subGisaid_FLU.py --input  --output  --D --fasta 
 
 The output of the script includes one log file, one FASTA file with formatted headers, and one XLSX file ready for submission to GISAID.
 
@@ -145,7 +145,6 @@ The output of the script includes one log file, one FASTA file with formatted he
 
 
 
-![codeCOV2](./Pictures/covEX.png)
 
 NOTE: The header of the FASTA file NEEDS to be the SAME as the content in the Genome column. Please verify this.
 
@@ -190,15 +189,18 @@ Data Columns
     Country: Your country
     Continent: Your continent
 
+  Script Arguments
+  ![codeDENV2](./Pictures/DENVCODE.png)
+    
+    --input: The CSV file with your data
+    --output: Name of the output file
+    --D: Number of the dynamic
+    --fasta: Path to the folder with FASTA files
+    --cover: Percentage of coverage of segments you want
 
-  --input: The CSV file with your data
-  --output: Name of the output file
-  --D: Number of the dynamic
-  --fasta: Path to the folder with FASTA files
-  --cover: Percentage of coverage of segments you want
 
 
-    python3 subGisaid_DENV.py --input  --output  --D --fasta  --cover 
+    python3 subGisaid_DENV.py --input  --output  --D --fasta  
 
 The output of the script includes one log file, one FASTA file with formatted headers, and one XLSX file ready for submission to GISAID.
 
@@ -207,7 +209,6 @@ The output of the script includes one log file, one FASTA file with formatted he
 
 
 
-![codeDENV2](./Pictures/DENVCODE.png)
 
 NOTE: The header of the FASTA file NEEDS to be the SAME as the content in the Genome column. Please verify this.
 
