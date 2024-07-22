@@ -86,50 +86,49 @@
 
 </details>
 
-
-For any questions or suggestions, please contact the CEVIVAS team or send an email to: iago.lima.esib@esib.butantan.br or iagottlima@gmail.com.
-
-
-  Windows option coming soon...
-
   Please follow the README file above for the specific virus:
 
-</details>
-Readme_FLU for Influenza:
 <details>
-  <summary>README_FLU</summary>
-#Readme_FLU
+  <summary>README_FLU for Influenza:</summary>
+  <br />
+  
 This README provides an overview of the data columns and script requirements for the SG-FLU project.
 
-   Data Columns
+**Requirements for the CSV to Run the Influenza Script:** 
 
-    ID: Sample ID
-    Genome: The name of the FASTA file
-    Type: Flu type (A or B)
-    Subtype: The subtype of the flu (H1N1, H3N2, Victoria, or Yamagata)
-    REQUESTING_STATE: Your state
-    Segment_1_Coverage: Coverage of segment 1
-    Segment_2_Coverage: Coverage of segment 2
-    Segment_3_Coverage: Coverage of segment 3
-    Segment_4_Coverage: Coverage of segment 4
-    Segment_5_Coverage: Coverage of segment 5
-    Segment_6_Coverage: Coverage of segment 6
-    Segment_7_Coverage: Coverage of segment 7
-    Segment_8_Coverage: Coverage of segment 8
-    REQUESTING_UNIT: Name of your unit
-    Collection_Date: Collection date
-    Authors: Name of the authors (please follow the example)
-  Script Arguments
+- **ID:** Sample ID
+- **Genome:** The name of the FASTA file
+- **Type:** Flu type (A or B)
+- **Subtype:** The subtype of the flu (H1N1, H3N2, Victoria, or Yamagata)
+- **REQUESTING_STATE:** Your state
+- **Segment_1_Coverage:** Coverage of segment 1
+- **Segment_2_Coverage:** Coverage of segment 2
+- **Segment_3_Coverage:** Coverage of segment 3
+- **Segment_4_Coverage:** Coverage of segment 4
+- **Segment_5_Coverage:** Coverage of segment 5
+- **Segment_6_Coverage:** Coverage of segment 6
+- **Segment_7_Coverage:** Coverage of segment 7
+- **Segment_8_Coverage:** Coverage of segment 8
+- **REQUESTING_UNIT:** Name of your unit
+- **Collection_Date:** Collection date
+- **Authors:** Name of the authors (please follow the example)
+
+To execute the influenza scripts, use the command below:
+
+ ```sh
+   python3 subGisaid_FLU.py --input  --output  --D --fasta  --cover
+```
+
+  --input: The CSV file with your data <br />
+  --output: Name of the output file <br />
+  --D: Number of the dynamic <br />
+  --fasta: Path to the folder with FASTA files <br />
+  --cover: Percentage of coverage of segments you want <br />
+
+Exemple: 
+
+
   ![codeflu](./Pictures/Code1.png)
-    
-    --input: The CSV file with your data
-    --output: Name of the output file
-    --D: Number of the dynamic
-    --fasta: Path to the folder with FASTA files
-    --cover: Percentage of coverage of segments you want
-
-
-    python3 subGisaid_FLU.py --input  --output  --D --fasta  --cover 
 
 The output of the script includes one log file, one FASTA file with formatted headers, and one XLSX file ready for submission to GISAID.
 
@@ -138,6 +137,8 @@ The output of the script includes one log file, one FASTA file with formatted he
 NOTE: The header of the FASTA file NEEDS to be the SAME as the content in the Genome column. Please verify this.
 
 Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should be "EPI_ISL_00097".
+
+
 ![fastaflu](./Pictures/fastaEX.png)
 ![ColumFLu](./Pictures/FastaEX2.png)
 
@@ -168,6 +169,8 @@ Data Columns
     Authors: Names of the authors (please follow the example)
     Country: Your country
     Continent: Your continent
+
+ python3 subGisaid_FLU.py --input  --output  --D --fasta 
     
   Script Arguments
   ![codeCOV2](./Pictures/covEX.png)
@@ -177,8 +180,6 @@ Data Columns
     --fasta: Path to the folder with FASTA files
     --cover: Percentage of coverage of segments you want
 
-
-    python3 subGisaid_FLU.py --input  --output  --D --fasta 
 
 The output of the script includes one log file, one FASTA file with formatted headers, and one XLSX file ready for submission to GISAID.
 
@@ -260,3 +261,9 @@ Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should 
 
 
 </details>
+
+
+For any questions or suggestions, please contact the CEVIVAS team or send an email to: iago.lima.esib@esib.butantan.br or iagottlima@gmail.com.
+
+
+  Windows option coming soon...
