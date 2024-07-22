@@ -19,8 +19,8 @@
   
   ### Installation Steps:
 
-# 1. Create a conda environment
-# Replace <my-env> with the name of your environment
+ ###  1. Create a conda environment
+ ####  Replace <my-env> with the name of your environment
  ```sh
 conda create --name <my-env>
   ```
