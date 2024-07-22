@@ -44,10 +44,14 @@ conda activate <my-env>
   pip install pandas biopython openpyxl
 
   ```
- "After the environment is created, a folder named after the environment (in my case, the name is 'sub') will also be created with all the necessary documents."
-  
-  ![ENV1](./Pictures/envEX1.png)
-  ![ENV2](./Pictures/envEX2.png) 
+ "After the environment is created, a folder named after the environment (in my case, the name is 'myenv') will also be created with all the necessary documents."
+
+  <p align="center">
+    <img src="./Pictures/envEX1.png" alt="ENV1" />
+    <img src="./Pictures/envEX2.png" alt="ENV2" />
+  </p>
+</details>
+```
   
   Ensure that these folders have been created correctly.
   You now have an environment to run the script. 
