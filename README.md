@@ -26,13 +26,13 @@ conda create --name <my-env>
   ```
 ######  For more information on how to create a conda environment, visit https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
 
-# 2. Activate the conda environment
-# Replace <my-env> with the name of your environment
+### 2. Activate the conda environment
+#### Replace <my-env> with the name of your environment
  ```sh
 conda activate <my-env>
   ```
   
-# 3. Install and Update the package list (required libraries), use the following commands:
+### 3. Install and Update the package list (required libraries), use the following commands:
   
   ```sh
   sudo apt-get update
