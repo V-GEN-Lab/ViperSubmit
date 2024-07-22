@@ -44,7 +44,7 @@ conda activate <my-env>
   pip install pandas biopython openpyxl
 
   ```
- "After the environment is created, a folder named after the environment (in my case, the name is 'myenv') will also be created with all the necessary documents."
+ After the environment is created, a folder named after the environment (in the example, the name is 'myenv') will also be created with all the necessary documents, as shown in Figure 1 and Figure 2.
 
   <p align="center">
     <img src="./Pictures/envEX1.png" alt="ENV1" />
