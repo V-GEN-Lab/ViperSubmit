@@ -3,7 +3,7 @@
   
   ## GISAID Submission Method
   
-  This repository contains scripts for the GISAID submission of Influenza viruses (H1N1, H3N2, Vic/Yamagata), Dengue (DENV), and SARS-CoV (COV).
+  This repository contains scripts for the GISAID submission of Influenza viruses (H1N1, H3N2, Vic/Yamagata), Dengue (DENV), and SARS-CoV-2 (COV).
   
   ### Files in the Code Folder
   
