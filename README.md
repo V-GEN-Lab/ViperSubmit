@@ -30,12 +30,12 @@
   pip install pandas biopython openpyxl
 
   ```
-  depois do ambinte ser criado uma pasta com o nome do ambite (no meu caso o nome é 'sub') vai ser criada tambem com todos os documentos necessario 
+ "After the environment is created, a folder named after the environment (in my case, the name is 'sub') will also be created with all the necessary documents."
   
   ![ENV1](./Pictures/envEX1.png)
   ![ENV2](./Pictures/envEX2.png) 
   
-  Certifique que essas pasta foram criadas corretamentes
+  Ensure that these folders have been created correctly.
   You now have an environment to run the script. 
   um exemplo de como ativa o ambiente no terminal, no meu caso eu nomei o ambiente como 'sub'
   note que o nome do ambite fica do lado nome do usuario/nome do computador 
@@ -49,9 +49,14 @@
 
  Dedicated Folder: Create a dedicated folder to run the scripts. The script combines all FASTA files related to the CSV and outputs a final FASTA file. To prevent accidental deletion of the final FASTA, move it to a separate folder after generation. Since the script stores all intermediate FASTA files in the working folder and deletes     them after use, ALWAYS move the final files to a different folder (e.g., final_files) to ensure better code functionality and data safety.
  In the Supplementary_files folder, I have provided examples of CSV and FASTA files with the necessary columns to run each script. Using these tables, the script should work without any issues. Please fill in the data in these tables using the guide provided for each script as previously mentioned.
+ 
+ Fasta Folder: Please create a folder for the FASTA files; this will facilitate the usage of the script when it searches for the FASTA files, like the example provided.
 
+ 
   For any questions or suggestions, please contact the CEVIVAS team or send an email to: iago.lima.esib@esib.butantan.br or iagottlima@gmail.com.
-Windows option coming soon...
+
+
+  Windows option coming soon...
 
 </details>
 <details>
