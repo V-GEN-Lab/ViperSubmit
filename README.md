@@ -30,8 +30,19 @@
   pip install pandas biopython openpyxl
 
   ```
-  You now have an environment to run the script. Always remember to activate the environment before running it.
-
+  depois do ambinte ser criado uma pasta com o nome do ambite (no meu caso o nome é 'sub') vai ser criada tambem com todos os documentos necessario 
+  
+  ![ENV1](./Pictures/envEX1.png)
+  ![ENV2](./Pictures/envEX2.png) 
+  
+  Certifique que essas pasta foram criadas corretamentes
+  You now have an environment to run the script. 
+  um exemplo de como ativa o ambiente no terminal, no meu caso eu nomei o ambiente como 'sub'
+  note que o nome do ambite fica do lado nome do usuario/nome do computador 
+  to activate the environment before running it.
+  ![ENV3](./Pictures/envEX3.png)
+  
+  
   Recommendations:
 
   Consistent Folder Usage: Always run the scripts in the same folder to ensure the log file is continuously updated. Running the script in a new folder will create a new log.
@@ -45,35 +56,55 @@
 </details>
 <details>
   <summary>README_FLU</summary>
-  Imagem do comando
-Explanations
- ```sh
- ative o ambiente 
- python3 -m venv (nome do seu ambiente)
- source (nome do seu ambiente)/bin/activate
- ```
-  
+
 This README provides an overview of the data columns and script requirements for the SG-FLU project.
-Data Columns
+
+   Data Columns
 
     ID: Sample ID
-    Subtype: The subtype of the flu (H1N1, H3N2, VIC, or Yama)
     Genome: The name of the FASTA file
+    Type: Flu type (A or B)
+    Subtype: The subtype of the flu (H1N1, H3N2, Victoria, or Yamagata)
+    REQUESTING_STATE: Your state
+    Segment_1_Coverage: Coverage of segment 1
+    Segment_2_Coverage: Coverage of segment 2
+    Segment_3_Coverage: Coverage of segment 3
+    Segment_4_Coverage: Coverage of segment 4
+    Segment_5_Coverage: Coverage of segment 5
+    Segment_6_Coverage: Coverage of segment 6
+    Segment_7_Coverage: Coverage of segment 7
+    Segment_8_Coverage: Coverage of segment 8
+    REQUESTING_UNIT: Name of your unit
     Collection_Date: Collection date
-    Segment_1_Coverage: Coverage of segment 1, only those above 80% will be approved
-    Segment_2_Coverage: Coverage of segment 2, only those above 80% will be approved
-    Segment_3_Coverage: Coverage of segment 3, only those above 80% will be approved
-    Segment_4_Coverage: Coverage of segment 4, only those above 80% will be approved
-    Segment_5_Coverage: Coverage of segment 5, only those above 80% will be approved
-    Segment_6_Coverage: Coverage of segment 6, only those above 80% will be approved
-    Segment_7_Coverage: Coverage of segment 7, only those above 80% will be approved
-    Segment_8_Coverage: Coverage of segment 8, only those above 80% will be approved
-    PARTNER_PROJECT: Partner's name (if not applicable, just put the name of your lab)
+    Authors: Name of the authors (please follow the example)
+  Script Arguments
+  ![codeflu](./Pictures/Code1.png)
+    
+    --input: The CSV file with your data
+    --output: Name of the output file
+    --D: Number of the dynamic
+    --fasta: Path to the folder with FASTA files
+    --cover: Percentage of coverage of segments you want
 
-Script Explanation
-Genome Column:
 
-In the column Genome, please include the name that is in the sample's FASTA file. Each sample should have a different FASTA file.
+    python3 subGisaid_FLU.py --input  --output  --D --fasta  --cover 
+
+The output of the script includes one log file, one FASTA file with formatted headers, and one XLSX file ready for submission to GISAID.
+
+![code2flu](./Pictures/ArquiEX1.png)
+
+NOTE: The header of the FASTA file NEEDS to be the SAME as the content in the Genome column. Please verify this.
+
+Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should be "EPI_ISL_00097".
+![fastaflu](./Pictures/fastaEX.png)
+![ColumFLu](./Pictures/FastaEX2.png)
+
+
+
+
+
+
+
 </details>
 
 <details>
@@ -84,16 +115,60 @@ This README provides an overview of the data columns and script requirements for
 Data Columns
 
     ID: Sample ID
-    Type: Sample type
     Genome: The name of the FASTA file
-    Passed_QC: Quality control (use 'A' for approved samples; only samples marked 'A' will be used)
-    State: The state
+    Pangolin_lineage: Lineage of pangolin
+    Clade: Number of the clade
+    REQUESTING_UNIT: The name of your laboratory
+    State: Your state
+    Abbreviations: Abbreviation of your state
     Collection_Date: Collection date
-    REQUESTING_UNIT: The name of partner laboratories (if not applicable, put the name of your lab)
-    PARTNER_PROJECT: Partner's name (if not applicable, just put the name of your lab)
+    REQUESTING_SEQ: Laboratory that sequenced the sample
+    Authors: Names of the authors (please follow the example)
+    Country: Your country
+    Continent: Your continent
 
+
+
+    --input: The CSV file with your data
+    --output: Name of the output file
+    --D: Number of the dynamic
+    --fasta: Path to the folder with FASTA files
+    --cover: Percentage of coverage of segments you want
+
+
+    python3 subGisaid_COV.py --input  --output  --D --fasta  --cover 
+
+The output of the script includes one log file, one FASTA file with formatted headers, and one XLSX file ready for submission to GISAID.
+
+![codeCOV1](./Pictures/covEXAQUS.png)
+
+
+
+
+![codeCOV2](./Pictures/covEX.png)
+
+NOTE: The header of the FASTA file NEEDS to be the SAME as the content in the Genome column. Please verify this.
+
+Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should be "EPI_ISL_00097".
+![fastaCOV](./Pictures/fastaCOV1.png)
+![ColumCOV](./Pictures/ColumCOV.png)
 
 </details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <details>
   <summary>README_DENV</summary>
   SG-DENV README
@@ -106,10 +181,39 @@ Data Columns
     Genome: The name of the FASTA file
     Serotype: The serotype of the sample
     Genotype: The genotype of the sample
-    Passed_QC: Quality control (use 'A' for approved samples, 'R' for rejected samples; only samples marked 'A' will be used)
-    State: The state
-    Collection_Date: Collection date
     REQUESTING_UNIT: The name of partner laboratories (if not applicable, put the name of your lab)
-    PARTNER_PROJECT: Partner's name (if not applicable, just put the name of your lab)
+    State: Your state
+    Abbreviations: Abbreviation of your state
+    Collection_Date: Collection date
+    REQUESTING_SEQ: Laboratory that sequenced the sample
+    Authors: Names of the authors (please follow the example)
+    Country: Your country
+    Continent: Your continent
+
+
+--input: The CSV file with your data
+    --output: Name of the output file
+    --D: Number of the dynamic
+    --fasta: Path to the folder with FASTA files
+    --cover: Percentage of coverage of segments you want
+
+
+    python3 subGisaid_DENV.py --input  --output  --D --fasta  --cover 
+
+The output of the script includes one log file, one FASTA file with formatted headers, and one XLSX file ready for submission to GISAID.
+
+![codeDENV1](./Pictures/DENVarquiv.png)
+
+
+
+
+![codeDENV2](./Pictures/DENVCODE.png)
+
+NOTE: The header of the FASTA file NEEDS to be the SAME as the content in the Genome column. Please verify this.
+
+Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should be "EPI_ISL_00097".
+![fastaDENV](./Pictures/DENVfasta.png)
+![ColumDENV](./Pictures/denvCOLUM.png)
+
 
 </details>
