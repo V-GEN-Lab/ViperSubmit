@@ -50,7 +50,7 @@ conda activate <my-env>
     <img src="./Pictures/envEX1.png" alt="ENV1" />
     <br />
     <span>Figure 1: Description of the first image.</span>
-    <br /><br />
+    <br /><br /><br />
     <img src="./Pictures/envEX2.png" alt="ENV2" />
     <br />
     <span>Figure 2: Description of the second image.</span>
