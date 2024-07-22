@@ -50,17 +50,17 @@ conda activate <my-env>
     <img src="./Pictures/envEX1.png" alt="ENV1" />
     <br />
     <span>Figure 1: Description of the first image.</span>
-    <br /><br /><br />
+    <br /><br />
     <img src="./Pictures/envEX2.png" alt="ENV2" />
     <br />
     <span>Figure 2: Description of the second image.</span>
   </p>
 </details>
+
   
-  Ensure that these folders have been created correctly.
-  You now have an environment to run the script. 
-  An example of how to activate the environment in the terminal (in this case, I named the environment 'sub', Note that the environment name appears next to the username/computer name in the terminal prompt."
-  to activate the environment before running it.
+Make sure that the folders have been created correctly. You now have an environment set up to run the script.
+
+To activate the environment, use the terminal. For example, if you named the environment 'myenv', you should see the environment name next to the username/computer name in the terminal prompt. Ensure you activate the environment before running the script.
   ![ENV3](./Pictures/envEX3.png)
 
   
