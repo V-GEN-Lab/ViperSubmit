@@ -46,19 +46,23 @@ conda activate <my-env>
   ```
  After the environment is created, a folder named after the environment (in the example, the name is 'myenv') will also be created with all the necessary documents, as shown in Figure 1 and Figure 2.
 
-  <p align="center">
+ <p align="center">
     <img src="./Pictures/envEX1.png" alt="ENV1" />
+    <br />
+    <span>Figure 1: Description of the first image.</span>
+    <br />
     <img src="./Pictures/envEX2.png" alt="ENV2" />
+    <br />
+    <span>Figure 2: Description of the second image.</span>
   </p>
 </details>
-
   
   Ensure that these folders have been created correctly.
   You now have an environment to run the script. 
   An example of how to activate the environment in the terminal (in this case, I named the environment 'sub', Note that the environment name appears next to the username/computer name in the terminal prompt."
   to activate the environment before running it.
   ![ENV3](./Pictures/envEX3.png)
-  
+
   
   Recommendations:
 
