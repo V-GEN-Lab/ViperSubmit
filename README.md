@@ -61,9 +61,15 @@ conda activate <my-env>
 Make sure that the folders have been created correctly. You now have an environment set up to run the script.
 
 To activate the environment, use the terminal. For example, if you named the environment 'myenv', you should see the environment name next to the username/computer name in the terminal prompt. Ensure you activate the environment before running the script.
-  ![ENV3](./Pictures/envEX3.png)
 
-  
+<p align="center">
+    <img src="./Pictures/envEX3.png" alt="ENV3" />
+    <br />
+    <span>Figure 3: Description of the second image.</span>
+  </p>
+</details>
+
+
   Recommendations:
 
   Consistent Folder Usage: Always run the scripts in the same folder to ensure the log file is continuously updated. Running the script in a new folder will create a new log.
