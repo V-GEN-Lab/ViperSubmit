@@ -129,11 +129,11 @@ Data Columns
 
 
 
-    --input: The CSV file with your data
-    --output: Name of the output file
-    --D: Number of the dynamic
-    --fasta: Path to the folder with FASTA files
-    --cover: Percentage of coverage of segments you want
+  --input: The CSV file with your data
+  --output: Name of the output file
+  --D: Number of the dynamic
+  --fasta: Path to the folder with FASTA files
+  --cover: Percentage of coverage of segments you want
 
 
     python3 subGisaid_COV.py --input  --output  --D --fasta  --cover 
@@ -191,11 +191,11 @@ Data Columns
     Continent: Your continent
 
 
---input: The CSV file with your data
-    --output: Name of the output file
-    --D: Number of the dynamic
-    --fasta: Path to the folder with FASTA files
-    --cover: Percentage of coverage of segments you want
+  --input: The CSV file with your data
+  --output: Name of the output file
+  --D: Number of the dynamic
+  --fasta: Path to the folder with FASTA files
+  --cover: Percentage of coverage of segments you want
 
 
     python3 subGisaid_DENV.py --input  --output  --D --fasta  --cover 
