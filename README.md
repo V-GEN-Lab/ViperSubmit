@@ -51,7 +51,7 @@ conda activate <my-env>
     <img src="./Pictures/envEX2.png" alt="ENV2" />
   </p>
 </details>
-```
+
   
   Ensure that these folders have been created correctly.
   You now have an environment to run the script. 
