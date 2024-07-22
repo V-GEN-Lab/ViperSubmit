@@ -46,11 +46,11 @@ conda activate <my-env>
   ```
  After the environment is created, a folder named after the environment (in the example, the name is 'myenv') will also be created with all the necessary documents, as shown in Figure 1 and Figure 2.
 
- <p align="center">
+<p align="center">
     <img src="./Pictures/envEX1.png" alt="ENV1" />
     <br />
     <span>Figure 1: Description of the first image.</span>
-    <br />
+    <br /><br />
     <img src="./Pictures/envEX2.png" alt="ENV2" />
     <br />
     <span>Figure 2: Description of the second image.</span>
