@@ -113,7 +113,7 @@ Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should 
 
 
 </details>
- Readme_COV for SARS-CoV-2
+ Readme_COV for SARS-CoV-2:
 <details>
   <summary>README_COV</summary>
 Explanations
@@ -159,22 +159,22 @@ Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should 
 ![fastaCOV](./Pictures/fastaCOV1.png)
 ![ColumCOV](./Pictures/ColumCOV.png)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </details>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- Readme_DENV for Dengue
+ Readme_DENV for Dengue:
 <details>
   <summary>README_DENV</summary>
   SG-DENV README
