@@ -59,7 +59,7 @@
 
   Please follow the README file above for the specific virus:
 
-  Readme_FLU for Influenza : [Readme_FLU](#Readme_flu)
+  Readme_FLU for Influenza : [Readme_FLU](#Readme_FLU)
   
   Readme_COV for SARS-CoV-2
   
