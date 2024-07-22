@@ -37,8 +37,7 @@
   
   Ensure that these folders have been created correctly.
   You now have an environment to run the script. 
-  um exemplo de como ativa o ambiente no terminal, no meu caso eu nomei o ambiente como 'sub'
-  note que o nome do ambite fica do lado nome do usuario/nome do computador 
+  An example of how to activate the environment in the terminal (in this case, I named the environment 'sub', Note that the environment name appears next to the username/computer name in the terminal prompt."
   to activate the environment before running it.
   ![ENV3](./Pictures/envEX3.png)
   
