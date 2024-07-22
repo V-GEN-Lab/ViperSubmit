@@ -18,35 +18,33 @@
   - Pandas and biopython
   
   ### Installation Steps:
-
- ###  1. Create a conda environment
- #####  Replace my-env with the name of your environment
- ```sh
-conda create --name <my-env>
-  ```
-######  For more information on how to create a conda environment, visit https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
-
-### 2. Activate the conda environment
-##### Replace my-env with the name of your environment
- ```sh
-conda activate <my-env>
-  ```
   
-### 3. Install and Update the package list (required libraries), use the following commands:
+  1. **Create a conda environment**
+     - Replace `<my-env>` with the name of your environment
+     ```sh
+     conda create --name <my-env>
+     ```
+     - For more information on how to create a conda environment, visit [Conda Documentation](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
   
-  ```sh
-  sudo apt-get update
-  sudo apt-get install python3
-  sudo apt-get install python3-pip python3-venv
-  python3 -m venv myenv(name of your  virtual environment)
-  source myenv/bin/activate
-  myenv\Scripts\activate
-  pip install pandas biopython openpyxl
-
-  ```
- After the environment is created, a folder named after the environment (in the example, the name is 'myenv') will also be created with all the necessary documents, as shown in Figure 1 and Figure 2.
-
-<p align="center">
+  2. **Activate the conda environment**
+     - Replace `<my-env>` with the name of your environment
+     ```sh
+     conda activate <my-env>
+     ```
+  
+  3. **Install and Update the package list (required libraries), use the following commands:**
+     ```sh
+     sudo apt-get update
+     sudo apt-get install python3
+     sudo apt-get install python3-pip python3-venv
+     python3 -m venv myenv  # Replace 'myenv' with your virtual environment name
+     source myenv/bin/activate
+     myenv\Scripts\activate  # Use this line if you're on Windows
+     pip install pandas biopython openpyxl
+     ```
+     After the environment is created, a folder named after the environment (in this example, 'myenv') will also be created with all the necessary documents, as shown in Figure 1 and Figure 2.
+  
+  <p align="center">
     <img src="./Pictures/envEX1.png" alt="ENV1" />
     <br />
     <span>Figure 1: Description of the first image.</span>
@@ -55,42 +53,39 @@ conda activate <my-env>
     <br />
     <span>Figure 2: Description of the second image.</span>
   </p>
-</details>
-
   
-Make sure that the folders have been created correctly. You now have an environment set up to run the script.
-
-To activate the environment, use the terminal. For example, if you named the environment 'myenv', you should see the environment name next to the username/computer name in the terminal prompt. Ensure you activate the environment before running the script.
-
-
-<p align="center">
+  Make sure that the folders have been created correctly. You now have an environment set up to run the script.
+  
+  To activate the environment, use the terminal. For example, if you named the environment 'myenv', you should see the environment name next to the username/computer name in the terminal prompt. Ensure you activate the environment before running the script.
+  
+  <p align="center">
     <img src="./Pictures/envEX3.png" alt="ENV3" />
     <br />
-    <span>Figure 3: Description of the second image.</span>
+    <span>Figure 3: Description of the third image.</span>
   </p>
+  
+  **Recommendations:**
+  
+  - **Consistent Folder Usage:** Always run the scripts in the same folder to ensure that the log file is continuously updated. Running the script in a new folder will create a new log file.
+  
+  - **Dedicated Folder:**
+    - Create a dedicated folder for running the scripts.
+    - The script processes all FASTA files related to the CSV input and generates a final FASTA file.
+    - To avoid accidental deletion of the final FASTA file, move it to a separate folder after it is generated.
+    - The script stores all intermediate FASTA files in the working folder and deletes them after use.
+    - To maintain better code functionality and data safety, **always move the final FASTA files** to a different folder (e.g., `final_files`).
+  
+  - **Supplementary Files:**
+    - In the `Supplementary_files` folder, you will find example CSV and FASTA files with the required columns for running each script.
+    - Use these examples to ensure the script works correctly.
+    - Fill in the data according to the guide provided for each script.
+  
+  - **FASTA Folder:**
+    - Create a specific folder for the FASTA files.
+    - This will simplify the script’s task of locating the FASTA files, as demonstrated in the provided example.
+
 </details>
 
-
- **Recommendations:**
-
-- **Consistent Folder Usage:** Always run the scripts in the same folder to ensure that the log file is continuously updated. Running the script in a new folder will create a new log file.
-
-- **Dedicated Folder:** 
-  - Create a dedicated folder for running the scripts. 
-  - The script processes all FASTA files related to the CSV input and generates a final FASTA file.
-  - To avoid accidental deletion of the final FASTA file, move it to a separate folder after it is generated. 
-  - The script stores all intermediate FASTA files in the working folder and deletes them after use. 
-  - To maintain better code functionality and data safety, **always move the final FASTA files** to a different folder (e.g., `final_files`).
-
-- **Supplementary Files:** 
-  - In the `Supplementary_files` folder, you will find example CSV and FASTA files with the required columns for running each script.
-  - Use these examples to ensure the script works correctly. 
-  - Fill in the data according to the guide provided for each script.
-
-- **FASTA Folder:** 
-  - Create a specific folder for the FASTA files.
-  - This will simplify the script’s task of locating the FASTA files, as demonstrated in the provided example.
-</details>
 
 For any questions or suggestions, please contact the CEVIVAS team or send an email to: iago.lima.esib@esib.butantan.br or iagottlima@gmail.com.
 
