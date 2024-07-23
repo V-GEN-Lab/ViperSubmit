@@ -79,7 +79,7 @@
   <summary>README_FLU for Influenza:</summary>
   <br />
   
-This README provides an overview of the data columns and script requirements for the SG-FLU project.
+This README provides an overview of the data columns required to run the script. In the `Supplementary_files`, there is an example of how each column should be filled out for the script execution. Below is the description of each column:
 
 **Requirements for the CSV to Run the Influenza Script:** 
 
@@ -137,12 +137,18 @@ Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should 
 
 
 </details>
- Readme_COV for SARS-CoV-2:
+
+
+
+
 <details>
-  <summary>README_COV</summary>
+  <summary>Readme_COV for SARS-CoV-:</summary>
+  <br />
+
 Explanations
 
-This README provides an overview of the data columns and script requirements for the SG-COV project.
+
+This README provides an overview of the data columns required to run the script. In the `Supplementary_files`, there is an example of how each column should be filled out for the script execution. Below is the description of each column:
 Data Columns
 
   - **ID:** Sample ID
@@ -203,13 +209,15 @@ Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should 
 
 
 </details>
- Readme_DENV for Dengue:
-<details>
-  <summary>README_DENV</summary>
-  SG-DENV README
-Explanations
 
-This README provides an overview of the data columns and script requirements for the SG-DENV project.
+
+<details>
+  <summary>Readme_DENV for Dengue:</summary>
+  <br />
+
+
+
+This README provides an overview of the data columns required to run the script. In the `Supplementary_files`, there is an example of how each column should be filled out for the script execution. Below is the description of each column:
 Data Columns
 
   - **ID:** Sample ID
