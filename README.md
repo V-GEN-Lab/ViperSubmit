@@ -158,29 +158,34 @@ Explanations
 This README provides an overview of the data columns and script requirements for the SG-COV project.
 Data Columns
 
-    ID: Sample ID
-    Genome: The name of the FASTA file
-    Pangolin_lineage: Lineage of pangolin
-    Clade: Number of the clade
-    REQUESTING_UNIT: The name of your laboratory
-    State: Your state
-    Abbreviations: Abbreviation of your state
-    Collection_Date: Collection date
-    REQUESTING_SEQ: Laboratory that sequenced the sample
-    Authors: Names of the authors (please follow the example)
-    Country: Your country
-    Continent: Your continent
-
+  - **ID:** Sample ID
+  - **Genome:** The name of the FASTA file
+  -  **Pangolin_lineage:** Lineage of pangolin
+  -  **Clade:**  Number of the clade
+  -  **REQUESTING_UNIT:** The name of your laboratory
+  -  **State:** Your state
+  -  **Abbreviations:** Abbreviation of your state
+  -  **Collection_Date:** Collection date
+  -  **REQUESTING_SEQ:** Laboratory that sequenced the sample
+  -  **Authors:** Names of the authors (please follow the example)
+  -  **Country:** Your country
+  -  **Continent:** Your continent
+ssh'''
  python3 subGisaid_FLU.py --input  --output  --D --fasta 
-    
+
+  '''
   Script Arguments
   ![codeCOV2](./Pictures/covEX.png)
-    --input: The CSV file with your data
-    --output: Name of the output file
-    --D: Number of the dynamic
-    --fasta: Path to the folder with FASTA files
-    --cover: Percentage of coverage of segments you want
+  
+     
+  ```sh
+   python3 subGisaid_FLU.py --input  --output  --D --fasta  --cover
+  ```
 
+  --input: The CSV file with your data <br />
+  --output: Name of the output file <br />
+  --D: Number of the dynamic <br />
+  --fasta: Path to the folder with FASTA files <br />
 
 The output of the script includes one log file, one FASTA file with formatted headers, and one XLSX file ready for submission to GISAID.
 
@@ -220,31 +225,30 @@ Explanations
 This README provides an overview of the data columns and script requirements for the SG-DENV project.
 Data Columns
 
-    ID: Sample ID
-    Genome: The name of the FASTA file
-    Serotype: The serotype of the sample
-    Genotype: The genotype of the sample
-    REQUESTING_UNIT: The name of partner laboratories (if not applicable, put the name of your lab)
-    State: Your state
-    Abbreviations: Abbreviation of your state
-    Collection_Date: Collection date
-    REQUESTING_SEQ: Laboratory that sequenced the sample
-    Authors: Names of the authors (please follow the example)
-    Country: Your country
-    Continent: Your continent
+  - **ID:** Sample ID
+  - **Genome:** The name of the FASTA file
+  -  **Serotype:** The serotype of the sample
+  -  **Genotype:** The genotype of the sample
+  -  **REQUESTING_UNIT:** The name of partner laboratories (if not applicable, put the name of your lab)
+  -  **State:** Your state
+  -  **Abbreviations:** Abbreviation of your state
+  -  **Collection_Date:** Collection date
+  -  **REQUESTING_SEQ:** Laboratory that sequenced the sample
+  -  **Authors:** Names of the authors (please follow the example)
+  -  **Country:** Your country
+  - **Continent:** Your continent
 
   Script Arguments
   ![codeDENV2](./Pictures/DENVCODE.png)
     
-    --input: The CSV file with your data
-    --output: Name of the output file
-    --D: Number of the dynamic
-    --fasta: Path to the folder with FASTA files
-    --cover: Percentage of coverage of segments you want
+   ```sh
+   python3 subGisaid_FLU.py --input  --output  --D --fasta  --cover
+   ```
 
-
-
-    python3 subGisaid_DENV.py --input  --output  --D --fasta  
+  --input: The CSV file with your data <br />
+  --output: Name of the output file <br />
+  --D: Number of the dynamic <br />
+  --fasta: Path to the folder with FASTA files <br />
 
 The output of the script includes one log file, one FASTA file with formatted headers, and one XLSX file ready for submission to GISAID.
 
