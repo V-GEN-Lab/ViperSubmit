@@ -19,20 +19,7 @@
   
   ### Installation Steps:
   
-  1. **Create a conda environment**
-     - Replace `<my-env>` with the name of your environment
-     ```sh
-     conda create --name <my-env>
-     ```
-     - For more information on how to create a conda environment, visit [Conda Documentation](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
-  
-  2. **Activate the conda environment**
-     - Replace `<my-env>` with the name of your environment
-     ```sh
-     conda activate <my-env>
-     ```
-  
-  3. **Install and Update the package list (required libraries), use the following commands:**
+  1. **Install and Update the package list (required libraries), use the following commands:**
      ```sh
      sudo apt-get update
      sudo apt-get install python3
@@ -42,7 +29,7 @@
      myenv\Scripts\activate  # Use this line if you're on Windows
      pip install pandas biopython openpyxl
      ```
-     After the environment is created, a folder named after the environment (in this example, 'myenv') will also be created with all the necessary documents, as shown in Figure 1 and Figure 2.
+     After the environment is created, a folder named after the environment (in this example, 'myenv') will also be created with all the necessary documents. In my case, I named an environment as 'sub' as shown in Figure 1 and Figure 2.
   
   <p align="center">
     <img src="./Pictures/envEX1.png" alt="ENV1" />
