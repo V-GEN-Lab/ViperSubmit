@@ -1,0 +1,5 @@
+ID,Genome,Serotype,Genotype,REQUESTING_UNIT,State,Abbreviations,Collection_Date,REQUESTING_SEQ,Authors,Country,Continent
+CEVD_2400255,DENV_EPI_ISL_19150251.fasta,1,DENV1/V,INSTITUTO BUTANTAN,SAO PAULO,SP,2024-04-01,INSTITUTO BUTANTAN,"Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni",Brazil,South America
+CEVD_2400295,DENV_EPI_ISL_19150256.fasta,1,DENV1/V,INSTITUTO BUTANTAN,SAO PAULO,SP,2024-04-08,INSTITUTO BUTANTAN,"Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni",Brazil,South America
+CEVD_2400291,DENV_EPI_ISL_19150260.fasta,2,DENV2/C,INSTITUTO BUTANTAN,SAO PAULO,SP,2024-04-15,INSTITUTO BUTANTAN,"Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni",Brazil,South America
+CEVD_2200299,DENV_EPI_ISL_18739856.fasta,2,DENV2/AA,UBS J JOAMAR,SAO PAULO,SP,2021-06-10,INSTITUTO BUTANTAN ,"Gabriela, Ribeiro; Alex, Lima; Maria, Elias; Sandra, Vessoni; Luciano, Oliveira; Sumire, Hibi; Isabelle, Ferreira; Melissa, Palmieri; Eduardo, Mais",Brazil,South America
