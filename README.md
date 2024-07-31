@@ -276,6 +276,18 @@ For any questions or suggestions, please contact the CEVIVAS team or send an ema
   
   Selecione o vírus e configure os parâmetros, incluindo a pasta onde estão os arquivos FASTA. Na escolha da pasta para selecionar scripts, selecione a pasta Scripts que veio junto com o .exe.
   
+  Abaixo é o layout do progama
+  ![ViperS](./Pictures/ViperS.png)
+
+  --input: O arquivo CSV com os seus dados. <br />
+  --output: Nome do arquivo de saída. <br />
+   --D: Número da dinâmica. <br />
+  --fasta: Caminho para a pasta com os arquivos FASTA. <br />
+
+Se for usar a opção FLU, configure também:
+
+  --cover: Percentual de cobertura dos segmentos desejados. <br />
+  
   Depois, é só processar o arquivo, e o programa vai devolver um arquivo Excel e um multi-FASTA na pasta ViperSubmit, que é a pasta do programa.
   
   Um atalho na sua área de trabalho será criado para o script ser acessado mais rapidamente.
