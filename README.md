@@ -266,4 +266,15 @@ Example: If the Genome column contains "EPI_ISL_00097", the FASTA header should 
 For any questions or suggestions, please contact the CEVIVAS team or send an email to: iago.lima.esib@esib.butantan.br or iagottlima@gmail.com.
 
 
-  Windows option coming soon...
+  **Windows**
+  Baixe o instalador do programa chamado ViperSubmitInstaller.exe. Ele vai criar uma pasta chamada ViperSubmit com o programa e uma pasta chamada Scripts.
+
+  Rode o programa como administrador.
+  
+  Com o programa aberto, selecione os seus arquivos de input (eles devem ser no formato CSV, basta salvar a planilha do Excel como CSV).
+  
+  Selecione o vírus e configure os parâmetros, incluindo a pasta onde estão os arquivos FASTA. Na escolha da pasta para selecionar scripts, selecione a pasta Scripts que veio junto com o .exe.
+  
+  Depois, é só processar o arquivo, e o programa vai devolver um arquivo Excel e um multi-FASTA na pasta ViperSubmit, que é a pasta do programa.
+  
+  Um atalho na sua área de trabalho será criado para o script ser acessado mais rapidamente.
