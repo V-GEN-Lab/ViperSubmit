@@ -267,6 +267,7 @@ For any questions or suggestions, please contact the CEVIVAS team or send an ema
 
 
   **Windows**
+  
   Baixe o instalador do programa chamado ViperSubmitInstaller.exe. Ele vai criar uma pasta chamada ViperSubmit com o programa e uma pasta chamada Scripts.
 
   Rode o programa como administrador.
